@@ -1,0 +1,378 @@
+/* --- ↓Start textフィールド ---　*/
+.iptxt {
+	position: relative;
+	width: 90%;
+	margin: 10px 3%;
+}
+.iptxt input[type='text'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	color: #5c5c5c;
+	border: 1px solid #1b2538;
+	border-radius: 4px;
+}
+
+.ef input[type='text']:focus {
+	border: 1px solid #da3c41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+
+/* --- ↑End textフィールド ---　*/
+
+/* --- ↓Start 日付フィールド ---　*/
+.cp_date {
+	position: relative;
+	width: 90%;
+	margin: 10px 3%;
+}
+.cp_date input[type='date'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	color: #5c5c5c;
+	border: 1px solid #1b2538;
+	border-radius: 4px;
+}
+.ef input[type='date']:focus {
+	border: 1px solid #da3c41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+/* --- ↑End 日付フィールド ---　*/
+
+/* --- ↓Start テキストエリア ---　*/
+textarea{
+	position: relative;
+  line-height: 1.5em;
+	/*width: 80%;*/
+  margin: 10px 3%;
+  font: 15px/24px sans-serif;
+  color: #5c5c5c;
+  transition: 0.3s;
+  letter-spacing: 1px;
+  border: 1px solid #1b2538;
+  border-radius: 5px;
+}
+textarea:focus {
+	border: 1px solid #da3c41;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+
+/* --- ↑End テキストエリア ---　*/
+
+
+/* --- ↓Start チェックボックス ---　*/
+.cp_ipcheck {
+	width: 100%;
+	margin: 2em auto;
+	text-align: left;
+}
+.cp_ipcheck input[type='checkbox'] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+.cp_ipcheck label {
+	position: relative;
+	display: inline-block;
+	margin-right: 30px;
+	padding-right: 10px;
+	padding-left: 35px;
+	cursor: pointer;
+}
+.cp_ipcheck label::before {
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 24px;
+	height: 24px;
+	content: ' ';
+	border: 2px solid #da3c41;
+}
+.cp_ipcheck input[type='checkbox'] + label::before {
+	border-radius: 4px;
+}
+.cp_ipcheck input[type='checkbox']:checked + label {
+	padding-left: 10px;
+	color: #ffffff;
+}
+.cp_ipcheck input[type='checkbox']:checked + label::before {
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #da3c41;
+}
+/* Transition */
+.cp_ipcheck label, .cp_ipcheck label::before {
+	-webkit-transition: 0.25s all ease;
+	        transition: 0.25s all ease;
+}
+
+/* --- ↑End チェックボックス ---　*/
+
+
+/* --- ↓Start ラジオボックス ---　*/
+.cp_ipradio {
+	width: 90%;
+	margin: 2em auto;
+	text-align: left;
+}
+.cp_ipradio input[type='radio'] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+.cp_ipradio label {
+	position: relative;
+	display: inline-block;
+	margin-right: 30px;
+	padding-right: 10px;
+	padding-left: 35px;
+	cursor: pointer;
+}
+.cp_ipradio label::before {
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 24px;
+	height: 24px;
+	content: ' ';
+	border: 2px solid #da3c41;
+	border-radius: 4px;
+}
+.cp_ipradio input[type='radio'] + label::before {
+	border-radius: 18px;
+}
+.cp_ipradio input[type='radio']:checked + label {
+	padding-left: 10px;
+	color: #ffffff;
+}
+.cp_ipradio input[type='radio']:checked + label::before {
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #da3c41;
+}
+/* Transition */
+.cp_ipradio label, .cp_ipradio label::before {
+	-webkit-transition: 0.25s all ease;
+	        transition: 0.25s all ease;
+}
+/* --- ↑End ラジオボックス ---　*/
+
+/*--- ↓Start リスト ---*/
+.cp_ipselect {
+	overflow: hidden;
+	width: 90%;
+	margin: 2em auto;
+	text-align: center;
+}
+.cp_ipselect select {
+	width: 100%;
+	padding-right: 1em;
+	cursor: pointer;
+	text-indent: 0.01px;
+	text-overflow: ellipsis;
+	border: none;
+	outline: none;
+	background: transparent;
+	background-image: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+.cp_ipselect select::-ms-expand {
+    display: none;
+}
+.cp_ipselect.cp_sl01 {
+	position: relative;
+	border: 1px solid #bbbbbb;
+	border-radius: 2px;
+	background: #ffffff;
+}
+.cp_ipselect.cp_sl01::before {
+	position: absolute;
+	top: 0.8em;
+	right: 0.9em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #666666;
+	pointer-events: none;
+}
+.cp_ipselect.cp_sl01 select {
+	padding: 8px 38px 8px 8px;
+	color: #666666;
+}
+/* --- ↑End リスト ---　*/
+
+
+/* --- ↓Start 画面レイアウト全体 --- */
+div.box1 {
+    position: relative;
+    margin: 2em 0;
+    padding: 3em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+    width: 1400px;
+}
+.box1 .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -15px;
+    left: 10px;
+    padding: 0 15px;
+    line-height: 1;
+    font-size: 50px;
+    background: #FFF;
+    color: #148eff;
+    font-weight: bold;
+}
+.box1 p {
+    margin: 0;
+    padding: 0;
+}
+
+
+div.box2 {
+    position: relative;
+    margin: 2em 0;
+    padding: 3em 1em;
+    border: solid 3px #ffea84;
+    border-radius: 8px;
+    width: 1400px;
+}
+.box2 .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -15px;
+    left: 10px;
+    padding: 0 15px;
+    line-height: 1;
+    font-size: 50px;
+    background: #FFF;
+    color: #ffe257;
+    font-weight: bold;
+}
+.box2 p {
+    margin: 0;
+    padding: 0;
+}
+
+div.box3 {
+    position: relative;
+    margin: 2em 0;
+    padding: 3em 0em;
+    border: solid 3px #FFFFFF;
+    border-radius: 8px;
+    width: 1400px;
+}
+
+.box3 p {
+    margin: 0;
+    padding: 0;
+}
+
+
+.box4 {
+    margin: 2em 0;
+    background: #f1f1f1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.22);
+}
+.box4 .box-title {
+    font-size: 1.2em;
+    background: #5fc2f5;
+    padding: 4px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.box4 p {
+    padding: 15px 20px;
+    margin: 0;
+}
+
+
+
+/*--- ↑End 画面レイアウト全体 ---*/
+
+/* --- ↑Start テーブル ---*/
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+/* --- ↑End テーブル ---*/
+
+/* --- ↑Start TD ---*/
+td.item_label_1 {
+  background-color: #bde9ba;
+  text-align: center;
+  vertical-align: middle;
+	width: 250px;
+	height:70px;
+}
+td.item_value_1 {
+  /*background-color: #bde9ba; */
+  text-align: center;
+  vertical-align: middle;
+	width: 300px;
+}
+td.item_label_2 {
+  background-color: #ccefde;
+  text-align: center;
+  vertical-align: middle;
+	width: 250px;
+}
+td.item_value_2 {
+  /*background-color: #bde9ba; */
+  text-align: center;
+  vertical-align: middle;
+	width: 300px;
+}
+ /*--- ↑End TD---*/
+
+ /*--- ↓Start TH---*/
+ th.title_label_1 {
+   background-color: #ccefde;
+   text-align: center;
+   vertical-align: middle;
+   font-size: 24px;
+	 color: #969696;
+ }
+ /*--- ↑End TH---*/
+
+ /* --- ↓Start ボタンのCSS ---　*/
+ .btn-flat-border {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+	width:100px;
+	text-align: center;
+}
+
+.btn-flat-border:hover {
+  background: #67c5ff;
+  color: #FFFFFF;
+}
+ /* --- ↑End ボタンのCSS ---　*/
