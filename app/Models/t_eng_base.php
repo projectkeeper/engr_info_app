@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class t_eng_base extends Model
 {
@@ -56,9 +57,21 @@ class t_eng_base extends Model
         //});
       }
 
-      //氏名（氏）
+      //氏名（姓）
       if (isset($params['family_name'])){
         $query->where('family_name', $params['family_name']);
+      }
+
+      //カナ名（名）
+      if (isset($params['first_name_kana'])){
+        //$query->where(function ($query) use ($params) {
+        $query->where('first_name_kana', $params['first_name_kana']);
+        //});
+      }
+
+      //カナ名（姓）
+      if (isset($params['family_name_kana'])){
+        $query->where('family_name_kana', $params['family_name_kana']);
       }
 
       //資格
@@ -76,12 +89,56 @@ class t_eng_base extends Model
         $query->where('station_nearby', $params['station_nearby']);
       }
 
+//Log::debug('OS');
+//Log::debug($params['OS']);
+
+      //OS
+      if (isset($params['OS'])){
+
+        $OS = $params['OS'];
+
+        for($i=0; $i<count($params['OS']); ++$i){
+          if($i==0){
+            $query->where('OS', 'LIKE', '%'.$OS[$i].'%' ); // Andのlike句
+          }else{
+            $query->orWhere('OS', 'LIKE', '%'.$OS[$i].'%' ); // Orのlike句
+          }
+        }
+      }
+
+      //プログラミング言語
+      if (isset($params['PG_Lang'])){
+        $PG_Lang = $params['PG_Lang'];
+
+        for($i=0; $i<count($params['PG_Lang']); ++$i){
+          if($i==0){
+            $query->where('PG_Lang', 'LIKE', '%'.$PG_Lang[$i].'%' ); // Andのlike句
+          }else{
+            $query->orWhere('PG_Lang', 'LIKE', '%'.$PG_Lang[$i].'%' ); // Orのlike句
+          }
+        }
+      }
+
+      //サーバ・クラウド
+      if (isset($params['dev_env'])){
+
+        $dev_env = $params['dev_env'];
+
+        for($i=0; $i<count($params['dev_env']); ++$i){
+          if($i==0){
+            $query->where('dev_env', 'LIKE', '%'.$dev_env[$i].'%' ); // Andのlike句
+          }else{
+            $query->orWhere('dev_env', 'LIKE', '%'.$dev_env[$i].'%' ); // Orのlike句
+          }
+        }
+      }
+
       /*
       エンジニア経歴情報の検索キー
       */
       //プロジェクト概要
       if (isset($params['pj_outline'])){
-        $query->where('pj_outline', $params['pj_outline']);
+        $query->where('pj_outline','LIKE', '%'.$params['pj_outline'].'%');
       }
 
       //プロジェクト概要
@@ -109,6 +166,7 @@ class t_eng_base extends Model
         $query->where('period_to', $params['period_to']);
       }
 
+//dd($query->toSql(), $query->getBindings());
       return $query;
     }
 

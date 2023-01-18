@@ -187,7 +187,7 @@
            </td>
            <td class="item_value_2">
              <div class="cp_date">
-               <input type="date" name="period_from_{{$i}}" value = "{{old('period_from_'.$i)}}" /><!--&#65374;-->
+               <input type="date" name="period_from_{{$i}}" value = "{{old('period_from_'.$i)}}" />
              </div>
            </td>
            <td class="item_label_2">

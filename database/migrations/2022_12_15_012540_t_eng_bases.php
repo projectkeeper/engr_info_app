@@ -19,6 +19,8 @@ return new class extends Migration
         $table->string('base_info_id', 100);
         $table->string('family_name', 100);
         $table->string('first_name', 100);
+        $table->string('family_name_kana', 100);
+        $table->string('first_name_kana', 100);
         $table->string('certificates', 200);
         $table->string('exprience_periods', 50);
         $table->string('station_nearby', 50);

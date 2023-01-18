@@ -60,6 +60,8 @@ textarea{
   letter-spacing: 1px;
   border: 1px solid #1b2538;
   border-radius: 5px;
+	width:350px;
+	height:150px;
 }
 textarea:focus {
 	border: 1px solid #da3c41;
@@ -308,9 +310,6 @@ div.box3 {
     padding: 15px 20px;
     margin: 0;
 }
-
-
-
 /*--- ↑End 画面レイアウト全体 ---*/
 
 /* --- ↑Start テーブル ---*/
@@ -346,6 +345,27 @@ td.item_value_2 {
   vertical-align: middle;
 	width: 300px;
 }
+td.item_label_3 {
+  background-color: #ea485c;
+  text-align: center;
+  vertical-align: middle;
+	width: 250px;
+}
+td.item_value_3_0 {
+  background-color: #d4d4d4;
+  text-align: center;
+  vertical-align: middle;
+	width: 300px;
+}
+
+td.item_value_3_1 {
+  /*background-color: #bde9ba; */
+  text-align: center;
+  vertical-align: middle;
+	width: 300px;
+	background-color: #f0f0f0;
+}
+
  /*--- ↑End TD---*/
 
  /*--- ↓Start TH---*/
