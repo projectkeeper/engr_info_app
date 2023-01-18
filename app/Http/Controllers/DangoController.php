@@ -38,7 +38,7 @@ class DangoController extends Controller
 
   public static function kikakusho(){
       #テンプレートパスを指示
-      $excel_file = storage_path('app/Excel_format/EngineerCareerFormat.xlsx');
+      $excel_file = storage_path('app/Excel_format/Template_EngineerCareer.xlsx');
 
       //エクセルオブジェクト設定と出力データの設定
       $spreadsheet = self::createBase($excel_file);
