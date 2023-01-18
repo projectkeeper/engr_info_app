@@ -26,10 +26,48 @@ class EditEngineerController extends Controller
       //検索結果と画面初期値（チェックボックス）を、設定する
       $data=['engineerInfoList' => $engineerInfoList];
 
+
+      $os_skill_data_list = explode(',',$engineerInfoList[0]['OS']);
+
+      $os_skill_info_list = [
+        ['Windows Series','0',''],
+        ['Linux' ,'1' , ''],
+        ['Unix' ,'2' , ''],
+        ['Unix' ,'3' , ''],
+        [ 'その他' ,'4', ''],
+      ];
+
+      $os_collection = self::createSkillCollection($os_skill_data_list, $os_skill_info_list);
+      //Log::debug("$os_collection: ");
+      //Log::debug($os_collection);
+
+      $data['os_collection'] = $os_collection;
+
+
+      //Log::debug("data[0][os_collection]: ");
+      Log::debug($data);
+
       //call view
       return view('layout_section.layout_section_engineer.section_edit', $data);
   }
 
+
+  public static function createSkillCollection($skill_db_data, $skill_collection){
+
+        $index_counter = 0;
+
+        foreach($skill_collection as $skill_list){
+          foreach($skill_db_data as $skill_num){
+
+              if($skill_list[1] == $skill_num){
+                $skill_collection[$index_counter][2] = "checked";
+              }
+          }
+          ++$index_counter;
+        }
+
+        return $skill_collection;
+  }
   /**
   編集画面　⇒　エンジニア情報 変更確認画面を開く
   */

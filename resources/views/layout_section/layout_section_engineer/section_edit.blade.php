@@ -96,6 +96,19 @@
             <td></td>
             <td></td>
           </tr>
+          <tr>
+            <td class="item_label_1">
+              <label>OS</label>
+            </td>
+            <td colspan="3">
+              <div class="cp_ipcheck">
+                @foreach ($os_collection as $key => $os_data)
+                  <input type="checkbox" id="ch1_{{$os_data[1]}}" name="OS[]" value="{{$os_data[1]}}" {{$os_data[2]}}/>
+                  <label for="ch1_{{$os_data[1]}}">{{$os_data[0]}}</label>
+                @endforeach
+              </div>
+            </td>
+          </tr>
         </table>
     </div>
 

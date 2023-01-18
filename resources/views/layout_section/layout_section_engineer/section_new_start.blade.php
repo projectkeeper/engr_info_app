@@ -85,7 +85,7 @@
         </tr>
       <tr>
         <td class="item_label_1">
-          <label>OS:</label>
+          <label>OS</label>
         </td>
         <td colspan="3">
           <div class="cp_ipcheck">
@@ -98,7 +98,7 @@
       </tr>
       <tr>
         <td class="item_label_1">
-          <label>プログラミング言語:&nbsp;</label>
+          <label>プログラミング言語</label>
         </td>
         <td colspan="3">
           <div class="cp_ipcheck">
@@ -111,7 +111,7 @@
       </tr>
       <tr>
         <td class="item_label_1">
-          <label>サーバ/クラウド:&nbsp;</label>
+          <label>サーバ/クラウド</label>
         </td>
         <td colspan="3">
           <div class="cp_ipcheck">
