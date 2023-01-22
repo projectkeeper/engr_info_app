@@ -170,7 +170,7 @@
           </td>
           <td class="item_value_2">
             <div class="iptxt">
-              <input type="text" name="dev_env_{{$i}}" value = "{{old('dev_env_'.$i)}}" placeholder="開発環境"/>
+              <input type="text" name="pj_dev_env_{{$i}}" value = "{{old('pj_dev_env_'.$i)}}" placeholder="開発環境"/>
             </div>
           </td>
          </div>

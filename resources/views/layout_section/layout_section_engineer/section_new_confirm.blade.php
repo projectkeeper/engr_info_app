@@ -180,8 +180,8 @@
         </td>
         <td class="item_value_2">
           <div class="iptxt">
-            @if(isset($career_info["dev_env"]))
-              {{$career_info["dev_env"]}}
+            @if(isset($career_info["pj_dev_env"]))
+              {{$career_info["pj_dev_env"]}}
             @endif
           </div>
         </td>

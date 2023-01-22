@@ -143,18 +143,18 @@ class t_eng_base extends Model
 
       //プロジェクト概要
       if (isset($params['task'])){
-        $query->where('task', $params['task']);
+        $query->where('task', 'LIKE', '%'.$params['task'].'%');
       }
 
       //プロジェクト概要
       if (isset($params['role'])){
-        $query->where('role', $params['role']);
+        $query->where('role', 'LIKE', '%'.$params['role'].'%');
       }
 
       //開発環境
-      //if (isset($params['dev_env'])){
-    //    $query->where('dev_env', $params['dev_env']);
-    //  }
+      if (isset($params['pj_dev_env'])){
+        $query->where('pj_dev_env', 'LIKE', '%'.$params['pj_dev_env'].'%');
+      }
 
       //期間(from)
       if (isset($params['period_from'])){

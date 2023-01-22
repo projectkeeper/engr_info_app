@@ -21,7 +21,7 @@ return new class extends Migration
         $table->string('pj_outline', 200);
         $table->string('role', 50);
         $table->string('task', 200);
-        $table->string('dev_env', 200);
+        $table->string('pj_dev_env', 200);
         $table->string('period_from', 200);
         $table->string('period_to', 200);
         $table->timestamps();

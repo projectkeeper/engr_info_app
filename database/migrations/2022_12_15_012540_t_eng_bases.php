@@ -16,7 +16,7 @@ return new class extends Migration
         //t_eng_bases(エンジニア基本情報)テーブル定義
         Schema::create('t_eng_bases', function (Blueprint $table) {
         $table->string('login_id', 100);
-        $table->string('base_info_id', 100);
+        $table->integer('base_info_id', 10);
         $table->string('family_name', 100);
         $table->string('first_name', 100);
         $table->string('family_name_kana', 100);

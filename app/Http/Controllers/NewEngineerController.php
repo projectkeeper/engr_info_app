@@ -75,21 +75,13 @@ public function openNew(Request $request){
 */
 public function openNewConfirm(Request $request){
 
-  //以下、3つの画面項目のレイアウトデータを取得する。
-  //  OS。プログラミング言語。サーバ/クラウド。
-  $os_collection =  $request -> os_collection;
-  $pg_lang_collection =  $request -> pg_lang_collection;
-  $dev_env_collection =  $request -> dev_env_collection;
 
   //エンジニア経歴（実績）蘭の行数を取得する。
   //$line_num = $request -> line_num;
 
+
   //エンジニア情報をセッションから取得する
   $data = $request->session()->get("eng_data");
-
-  $data['os_collection'] = $os_collection;
-  $data['pg_lang_collection'] = $pg_lang_collection;
-  $data['dev_env_collection'] = $dev_env_collection;
 
 
   for($i =0; $i<$data['line_num']; $i++){
@@ -98,7 +90,7 @@ public function openNewConfirm(Request $request){
         'pj_outline' => $data["pj_outline_".$i],
         'role' => $data["role_".$i],
         'task' => $data["task_".$i],
-        'dev_env' => $data["dev_env_".$i],
+        'pj_dev_env' => $data["pj_dev_env_".$i],
         'period_from' => $data["period_from_".$i],
         'period_to' => $data["period_to_".$i]
       ];
@@ -108,9 +100,18 @@ public function openNewConfirm(Request $request){
     $career_info = null;
   }
 
-//Log::debug($careers_info);
-
   $data['careers_info'] = $careers_info;
+
+  //以下、3つの画面項目のレイアウトデータを取得する。
+  //  OS。プログラミング言語。サーバ/クラウド。
+  $os_collection =  $request -> os_collection;
+  $pg_lang_collection =  $request -> pg_lang_collection;
+  $dev_env_collection =  $request -> dev_env_collection;
+
+  $data['os_collection'] = $os_collection;
+  $data['pg_lang_collection'] = $pg_lang_collection;
+  $data['dev_env_collection'] = $dev_env_collection;
+
 Log::debug("data");
 Log::debug($data);
 
@@ -129,13 +130,14 @@ public function registNew(Request $request){
   $login_id = $request->session()->get('login_id');
   $max_base_info_id = DB::table('t_eng_bases')->where('login_id', $login_id) -> max('base_info_id');
 
+Log::debug('maxUserId++: '.$max_base_info_id);
+
   if(isset($max_base_info_id)){
        ++$max_base_info_id;
   }else{
      $max_base_info_id = config('const.initial_base_info_id');  //初期IDを設定　
   }
 
-//Log::debug('maxUserId++: '.$max_base_info_id);
 
   //エンジニア基本情報をセッションから取得する
   $data = $request->session()->get("eng_data");
@@ -165,7 +167,7 @@ public function registNew(Request $request){
         'pj_outline' => $data["pj_outline_".$i],
         'role' => $data["role_".$i],
         'task' => $data["task_".$i],
-        'dev_env' => $data["dev_env_".$i],
+        'pj_dev_env' => $data["pj_dev_env_".$i],
         'period_from' => $data["period_from_".$i],
         'period_to' => $data["period_to_".$i]
       ];
@@ -191,8 +193,10 @@ public function registNew(Request $request){
    //セッションから新規エンジニア情報登録画面の入力値を取得する
    $data = $request->session()->get("eng_data");
 
+//    Log::debug("os_collection");
+
    //新規エンジニア情報登録画面へリダイレクトする
-   //return redirect('/open_new')->withInput($data);
    return redirect('/open_new')->withInput($data);
+
  }
 }

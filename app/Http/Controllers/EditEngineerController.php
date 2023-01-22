@@ -26,26 +26,28 @@ class EditEngineerController extends Controller
       //検索結果と画面初期値（チェックボックス）を、設定する
       $data=['engineerInfoList' => $engineerInfoList];
 
-
-      $os_skill_data_list = explode(',',$engineerInfoList[0]['OS']);
-
-      $os_skill_info_list = [
-        ['Windows Series','0',''],
-        ['Linux' ,'1' , ''],
-        ['Unix' ,'2' , ''],
-        ['Unix' ,'3' , ''],
-        [ 'その他' ,'4', ''],
-      ];
-
-      $os_collection = self::createSkillCollection($os_skill_data_list, $os_skill_info_list);
-      //Log::debug("$os_collection: ");
-      //Log::debug($os_collection);
-
-      $data['os_collection'] = $os_collection;
+      //DBデータのスキル情報を取得し、String(カンマ区切り)⇒配列に変換する。(理由）画面に表示させるため。
+      $os_skill_data_list = explode(',',$engineerInfoList[0]['OS']);    //OS情報
+      $pg_lang_data_list = explode(',',$engineerInfoList[0]['PG_Lang']);  //PG言語
+      $dev_env_data_list = explode(',',$engineerInfoList[0]['dev_env']);  //開発環境（サーバ、クラウド）
 
 
-      //Log::debug("data[0][os_collection]: ");
-      Log::debug($data);
+      //画面表示用のスキル情報（画面項目）を取得する。
+      $os_skill_info_list =  $request -> os_collection;
+      $pg_lang_info_list =  $request -> pg_lang_collection;
+      $dev_env_info_list =  $request -> dev_env_collection;
+
+      //画面上のチェックボックスでチェックされている項目に対して、「チェック済マーク」を付与する。
+      $os_collection = self::createSkillCollection($os_skill_data_list, $os_skill_info_list);  //OS
+      $pg_lang_collection = self::createSkillCollection($pg_lang_data_list, $pg_lang_info_list); //PG言語
+      $dev_env_collection = self::createSkillCollection($dev_env_data_list, $dev_env_info_list); //開発環境（サーバ、クラウド）
+
+//Log::debug($os_collection);
+
+      //Viewへ連携するデータを格納する。
+      $data['os_collection'] = $os_collection;  //OS
+      $data['pg_lang_collection'] = $pg_lang_collection;  //PG言語
+      $data['dev_env_collection'] = $dev_env_collection;  //開発環境（サーバ、クラウド）
 
       //call view
       return view('layout_section.layout_section_engineer.section_edit', $data);
@@ -68,6 +70,7 @@ class EditEngineerController extends Controller
 
         return $skill_collection;
   }
+
   /**
   編集画面　⇒　エンジニア情報 変更確認画面を開く
   */
@@ -129,9 +132,7 @@ class EditEngineerController extends Controller
         //エンジニア更新情報をセッションから取得する
         $data = $request->session()->get("upd_data");
 
-Log::debug('exeEdit');
-//Log::debug($login_id);
-Log::debug($data);
+//Log::debug($data);
 
         /**エンジニア基本情報を更新する*/
         //既存のエンジニア基本情報をt_eng_basesテーブルから取得する
@@ -143,11 +144,17 @@ Log::debug($data);
           'base_info_id' => $data['base_info_id'],
         ];
 
-        $base_info_data = ['first_name' => $data['first_name'],
+        $base_info_data = [
+            'first_name' => $data['first_name'],
             'family_name' => $data['family_name'],
+            'first_name_kana' => $data['first_name_kana'],
+            'family_name_kana' => $data['family_name_kana'],
             'certificates' => $data['certificates'],
             'exprience_periods' => $data['exprience_periods'],
             'station_nearby' => $data['station_nearby'],
+            'dev_env' => implode(",",$data['dev_env']),
+            'OS' => implode(",",$data['OS']),
+            'PG_Lang' => implode(",",$data['PG_Lang']),
         ];
 
         // エンジニア基本情報(t_eng_basesテーブル)を更新する。
@@ -158,36 +165,36 @@ Log::debug($data);
         //エンジニア経歴情報（実績）を更新する
         for($i =0; $i<$data['line_num']; $i++){
 
-        $career_info = t_eng_career::where('login_id', $login_id)->
-                                      where('base_info_id', $data['base_info_id'])->
-                                      where('career_info_id', $data['career_info_id_'.$i])->
-                                      firstOrFail();
+            $career_info = t_eng_career::where('login_id', $login_id)->
+                                            where('base_info_id', $data['base_info_id'])->
+                                              where('career_info_id', $data['career_info_id_'.$i])->
+                                                firstOrFail();
 
-//Log::debug($career_info);
+    //Log::debug($career_info);
 
-        //画面入力値の内、エンジニア経歴(実績）情報を、更新用変数に設定する
-        $career_info_key = [
-          'login_id' => $login_id,
-          'base_info_id' => $data['base_info_id'],
-          'career_info_id'=> $data['career_info_id_'.$i],
-        ];
+            //画面入力値の内、エンジニア経歴(実績）情報を、更新用変数に設定する
+            $career_info_key = [
+              'login_id' => $login_id,
+              'base_info_id' => $data['base_info_id'],
+              'career_info_id'=> $data['career_info_id_'.$i],
+            ];
 
-        $career_info_data = [
-          'pj_outline' => $data["pj_outline_".$i],
-          'role' => $data["role_".$i],
-          'task' => $data["task_".$i],
-          'dev_env' => $data["dev_env_".$i],
-          'period_from' => $data["period_from_".$i],
-          'period_to' => $data["period_to_".$i]
-        ];
+            $career_info_data = [
+              'pj_outline' => $data["pj_outline_".$i],
+              'role' => $data["role_".$i],
+              'task' => $data["task_".$i],
+              'pj_dev_env' => $data["pj_dev_env_".$i],
+              'period_from' => $data["period_from_".$i],
+              'period_to' => $data["period_to_".$i]
+            ];
 
-        //t_eng_careersテーブルのエンジニア経歴情報を更新する。
-//              $career_info -> fill($career)->save(); //データ更新実行
-        $career_info->updateOrInsert($career_info_key, $career_info_data);
+            //t_eng_careersテーブルのエンジニア経歴情報を更新する。
+    //              $career_info -> fill($career)->save(); //データ更新実行
+            $career_info->updateOrInsert($career_info_key, $career_info_data);
 
-        //初期化
-        $career_info_key = null; //経歴情報用の配列変数
-        $career_info_data = null; //t_eng_career　modelの初期化。初期化しないと、InsertではなくUpdate処理になってしまうため。
+            //初期化
+            $career_info_key = null; //経歴情報用の配列変数
+            $career_info_data = null; //t_eng_career　modelの初期化。初期化しないと、InsertではなくUpdate処理になってしまうため。
         }
 
         return view('layout_section.layout_section_engineer.section_update_complete');

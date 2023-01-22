@@ -56,7 +56,7 @@
       </td>
       <td>
         <div class="iptxt">
-          <input type="text" name='first_name_kana' value = "{{old('first_name_kana')}}" placeholder="名前（名）"></input>
+          <input type="text" name='first_name_kana' value = "{{old('first_name_kana')}}" placeholder="カナ名（名）"></input>
         </div>
       </td>
     </tr>
@@ -169,7 +169,7 @@
       </td>
       <td class="item_value_2">
         <div class="iptxt">
-          <input type="text" name="dev_env_pj" value = "{{old('dev_env')}}" placeholder="開発環境"/><br>
+          <input type="text" name="pj_dev_env" value = "{{old('pj_dev_env')}}" placeholder="開発環境"/><br>
         </div>
       </td>
       <td></td>

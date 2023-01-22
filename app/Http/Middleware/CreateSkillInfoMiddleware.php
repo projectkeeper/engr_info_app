@@ -45,11 +45,11 @@ class CreateSkillInfoMiddleware
 
       //セッションから新規エンジニア情報登録画面の入力値を取得する
       $data = $request->session()->get("eng_data");
-//Log::debug('eng_data:');
-//Log::debug($data);
+  //Log::debug('eng_data:');
+  //Log::debug($data);
+      if(!is_null($data)){
 
       //if(!empty($data)){
-        if(!is_null($data)){
 
           $OS = $data['OS'];
           $PG_Lang = $data['PG_Lang'];
@@ -59,46 +59,35 @@ class CreateSkillInfoMiddleware
           //Log::debug($PG_Lang);
           //Log::debug($dev_env);
 
-          $index_counter = 0;
 
-          foreach($os_collection as $os_base){
-            foreach($OS as $os_data){
-
-                if($os_base[1] == $os_data){
-                  $os_collection[$index_counter][2] = "checked";
-                }
-
-            }
-            ++$index_counter;
-          }
-
-          $index_counter = 0;
-
-          foreach($pg_lang_collection as $pg_lang_base){
-            foreach($PG_Lang as $pg_lang_data){
-
-                if($pg_lang_base[1] == $pg_lang_data){
-                  $pg_lang_collection[$index_counter][2] = "checked";
-                }
-
-            }
-            ++$index_counter;
-          }
-
-          $index_counter = 0;
-
-          foreach($dev_env_collection as $dev_env_base){
-            foreach($dev_env as $dev_env_data){
-
-                if($dev_env_base[1] == $dev_env_data){
-                  $dev_env_collection[$index_counter][2] = "checked";
-                }
-            }
-            ++$index_counter;
-          }
+          //画面上のチェックボックスでチェックされている項目に対して、「チェック済マーク」を付与する。
+          $os_collection = self::createSkillCollection($OS, $os_collection);  //OS
+          $pg_lang_collection = self::createSkillCollection($PG_Lang, $pg_lang_collection); //PG言語
+          $dev_env_collection = self::createSkillCollection($dev_env, $dev_env_collection); //開発環境
       }
 
       $request->merge(['os_collection' => $os_collection, 'pg_lang_collection' => $pg_lang_collection,'dev_env_collection' => $dev_env_collection]);
       return $next($request);
     }
+
+
+    public static function createSkillCollection($skill_db_data, $skill_collection){
+
+    $index_counter = 0;
+
+    foreach($skill_collection as $skill_list){
+          foreach($skill_db_data as $skill_num){
+
+            if($skill_list[1] == $skill_num){
+              $skill_collection[$index_counter][2] = "checked";
+              }
+          }
+      ++$index_counter;
+    }
+
+    return $skill_collection;
+    }
+
 }
+
+//}

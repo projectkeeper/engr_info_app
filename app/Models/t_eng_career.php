@@ -16,7 +16,7 @@ class t_eng_career extends Model
         'pj_outline',
         'role',
         'task',
-        'dev_env',
+        'pj_dev_env',
         'period_from',
         'period_to'
         ];

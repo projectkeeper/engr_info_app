@@ -65,7 +65,8 @@ Route::post('exe_search_engineer','SearchEngineerController@exeSearch')
 /**
 エンジニア情報更新、削除
 */
-Route::post('open_edit','EditEngineerController@openEdit'); // エンジニア情報一覧画面⇒エンジニア情報 変更画面を開く
+Route::post('open_edit','EditEngineerController@openEdit') // エンジニア情報一覧画面⇒エンジニア情報 変更画面を開く
+   ->middleware(CreateSkillInfoMiddleware::class);
 Route::get('open_edit','EditEngineerController@openEdit'); // エンジニア情報一覧画面⇒エンジニア情報 変更画面を開く
 Route::post('check_edit','EditEngineerController@checkEdit'); // エンジニア情報変更画面で、入力チェックを実施する。⇒ リダイレクトからエンジニア情報 変更確認画面を開く
 Route::get('confirm_edit','EditEngineerController@confirmEdit'); // エンジニア情報変更画面⇒エンジニア情報 変更確認画面を開く
@@ -74,6 +75,8 @@ Route::post('exe_edit','EditEngineerController@exeEdit'); // エンジニア情�
 Route::post('check_delete','EditEngineerController@checkDelete'); // エンジニア情報変更画面⇒入力チェックを実施する。⇒リダイレクトからエンジニア情報 削除確認画面を開く
 Route::get('confirm_delete','EditEngineerController@confirmDelete'); // エンジニア情報変更画面⇒エンジニア情報 削除確認画面を開く
 Route::post('exe_delete','EditEngineerController@exeDelete'); // エンジニア情報 削除確認画面⇒エンジニア情報 削除完了画面を開く
+
+Route::post('export_career_history', 'DataEngineerController@export_career_history'); // エンジニア情報 変更画面⇒エンジニア情報 エクセルファイルに出力する
 
 Auth::routes();
 

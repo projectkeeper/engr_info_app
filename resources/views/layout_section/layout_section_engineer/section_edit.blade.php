@@ -9,10 +9,8 @@
 @endcomponent
 
 @section('content1')
-<p>ここが本文のコンテンツ</p>
   <form>
     @csrf
-    <!--<input type="submit" class="button" title="新規登録" value="New Regist"></input><br>-->
 
     @isset($engineerInfoList)
     <div class="box1">
@@ -31,7 +29,7 @@
         @if ($base_info_flag == 0)
         <table>
           <tr>
-            <td class="item_label_1">
+            <td class="item_label_3">
               <label>名前（姓）</label>
             </td>
             <td>
@@ -39,7 +37,7 @@
                 <input type="text" name="family_name" value = "{{$engineerInfo['family_name']}}" placeholder="名前（姓）"/>
               </div>
             </td>
-            <td class="item_label_1">
+            <td class="item_label_3">
               <label>名前（名）</label>
             </td>
             <td>
@@ -49,7 +47,7 @@
             </td>
           </tr>
           <tr>
-            <td class="item_label_1">
+            <td class="item_label_3">
               <label>カナ氏名（姓）</label>
             </td>
             <td>
@@ -57,38 +55,39 @@
                 <input type="text" name="family_name_kana" value = "{{$engineerInfo['family_name_kana']}}" placeholder="カナ氏名（姓）"/>
               </div>
             </td>
-            <td class="item_label_1">
+            <td class="item_label_3">
               <label>カナ氏名（名）</label>
             </td>
-            <td class="item_value_1">
+            <!--<td class="item_value_1">-->
+            <td>
               <div class="iptxt">
-                  <input type="text" name='first_name_kana' value = "{{$engineerInfo['first_name_kana']}}" placeholder="カナ氏名（名）"/>
+                <input type="text" name='first_name_kana' value = "{{$engineerInfo['first_name_kana']}}" placeholder="カナ氏名（名）"/>
               </div>
             </td>
           </tr>
           <tr>
-            <td class="item_label_1">
+            <td class="item_label_3">
               <label>資格</label>
             </td>
-            <td class="item_value_1">
+            <td>
               <div class="iptxt">
                 <input type="text" name="certificates" value = "{{$engineerInfo['certificates']}}" placeholder="資格"/>
               <div class="iptxt">
             </td>
-            <td class="item_label_1">
+            <td class="item_label_3">
                 経験年数
             </td>
-            <td  class="item_value_1">
+            <td>
               <div class="iptxt">
                 <input type="text" name="exprience_periods" value = "{{$engineerInfo['exprience_periods']}}" placeholder="経験年数"/>
               </div>
             </td>
           </tr>
           <tr>
-            <td class="item_label_1">
+            <td class="item_label_3">
                 最寄り駅
             </td>
-            <td class="item_value_1">
+            <td>
               <div class="iptxt">
                 <input type="text" name="station_nearby" value = "{{$engineerInfo['station_nearby']}}" placeholder="最寄り駅"/>
               </div>
@@ -97,15 +96,41 @@
             <td></td>
           </tr>
           <tr>
-            <td class="item_label_1">
+            <td class="item_label_3">
               <label>OS</label>
             </td>
             <td colspan="3">
               <div class="cp_ipcheck">
-                @foreach ($os_collection as $key => $os_data)
-                  <input type="checkbox" id="ch1_{{$os_data[1]}}" name="OS[]" value="{{$os_data[1]}}" {{$os_data[2]}}/>
-                  <label for="ch1_{{$os_data[1]}}">{{$os_data[0]}}</label>
+                @foreach ($os_collection as $key => $data)
+                  <input type="checkbox" id="ch1_{{$data[1]}}" name="OS[]" value="{{$data[1]}}" {{$data[2]}}/>
+                  <label for="ch1_{{$data[1]}}">{{$data[0]}}</label>
                 @endforeach
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="item_label_3">
+              <label>プログラミング言語</label>
+            </td>
+            <td colspan="3">
+              <div class="cp_ipcheck">
+              @foreach ($pg_lang_collection as $key => $data)
+                <input type="checkbox" id="ch2_{{$data[1]}}" name="PG_Lang[]" value="{{$data[1]}}" {{$data[2]}} />
+                <label for="ch2_{{$data[1]}}">{{$data[0]}}</label>
+              @endforeach
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="item_label_3">
+              <label>サーバ/クラウド</label>
+            </td>
+            <td colspan="3">
+              <div class="cp_ipcheck">
+              @foreach ($dev_env_collection as $key => $data)
+                <input type="checkbox" id="ch3_{{$data[1]}}" name="dev_env[]" value="{{$data[1]}}" {{$data[2]}} />
+                <label for="ch3_{{$data[1]}}">{{$data[0]}}</label>
+              @endforeach
               </div>
             </td>
           </tr>
@@ -135,7 +160,7 @@
             </th>
           <tr>
           <tr>
-            <td class="item_label_2">
+            <td class="item_label_3">
                <label>プロジェクト概要</label>
             </td>
             <td class="item_value_2">
@@ -143,7 +168,7 @@
                <input type="text" name="pj_outline_{{$line_num}}" value = "{{$engineerInfo['pj_outline']}}" placeholder="プロジェクト"/>
              </div>
             </td>
-            <td class="item_label_2">
+            <td class="item_label_3">
                  <label>職務</label>
              </td>
              <td class="item_value_2">
@@ -159,19 +184,19 @@
              </td>
           </tr>
           <tr>
-            <td class="item_label_2">
+            <td class="item_label_3">
                  <label>開発環境</label>
             </td>
             <td class="item_value_2">
               <div class="iptxt">
-                 <input type="text" name="dev_env_{{$line_num}}" value = "{{$engineerInfo['dev_env']}}" placeholder="開発環境"/>
+                 <input type="text" name="pj_dev_env_{{$line_num}}" value = "{{$engineerInfo['pj_dev_env']}}" placeholder="開発環境"/>
               </div>
             </td>
             <td></td>
             <td></td>
           </tr>
           <tr>
-            <td class="item_label_2">
+            <td class="item_label_3">
                <label>開発期間(from)</label>
             </td>
             <td class="item_value_2">
@@ -179,7 +204,7 @@
                <input type="date" name="period_from_{{$line_num}}" value = "{{$engineerInfo['period_from']}}" /><!--&#65374;-->
              </div>
             </td>
-            <td class="item_label_2">
+            <td class="item_label_3">
                <label>開発期間(to)</label>
             </td>
             <td class="item_value_2">
@@ -189,16 +214,14 @@
             </td>
           </tr>
           <tr>
-            <td class="item_label_2">
+            <td class="item_label_3">
                   <label>作業内容</label>
             </td>
             <td class="item_value_2">
                   <textarea name="task_{{$line_num}}" placeholder="作業内容" >{{$engineerInfo['task']}}</textarea>
             </td>
-            <td>
-            </td>
-            <td>
-            </td>
+            <td></td>
+            <td></td>
           </tr>
 
           <input type="hidden" name="career_info_id_{{$line_num}}" value={{$engineerInfo['career_info_id']}}></input>
