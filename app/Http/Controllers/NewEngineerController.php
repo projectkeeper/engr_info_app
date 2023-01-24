@@ -94,9 +94,8 @@ public function openNewConfirm(Request $request){
         'period_from' => $data["period_from_".$i],
         'period_to' => $data["period_to_".$i]
       ];
+      $careers_info[] = $career_info;
     }
-
-    $careers_info[] = $career_info;
     $career_info = null;
   }
 

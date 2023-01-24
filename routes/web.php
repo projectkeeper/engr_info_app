@@ -76,7 +76,7 @@ Route::post('check_delete','EditEngineerController@checkDelete'); // エンジ�
 Route::get('confirm_delete','EditEngineerController@confirmDelete'); // エンジニア情報変更画面⇒エンジニア情報 削除確認画面を開く
 Route::post('exe_delete','EditEngineerController@exeDelete'); // エンジニア情報 削除確認画面⇒エンジニア情報 削除完了画面を開く
 
-Route::post('export_career_history', 'DataEngineerController@export_career_history'); // エンジニア情報 変更画面⇒エンジニア情報 エクセルファイルに出力する
+Route::post('export_career_history', 'DataExportController@export_career_history'); // エンジニア情報 変更画面⇒エンジニア情報 エクセルファイルに出力する
 
 Auth::routes();
 
