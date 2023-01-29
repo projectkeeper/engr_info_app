@@ -78,11 +78,31 @@ Route::post('exe_delete','EditEngineerController@exeDelete'); // エンジニア
 
 Route::post('export_career_history', 'DataExportController@export_career_history'); // エンジニア情報 変更画面⇒エンジニア情報 エクセルファイルに出力する
 
-Auth::routes();
+/**
+マスタ情報更新、削除
+*/
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+##OSマスタ##
+Route::post('open_os_search_master','SearchMasterController@openOsSearch'); // Menu⇒OS情報 検索画面を開く
+Route::post('exe_os_search_master','SearchMasterController@exeOsSearch'); // 検索を実施⇒　OSマスタ情報一覧画面を開く
+Route::post('check_new_os','RegEditOsMasterController@checkNewOs'); //　登録値の入力チェックを実施⇒ 登録処理をCall
+Route::get('exe_regist_new_os','RegEditOsMasterController@exeRegistNewOs'); //　登録処理を実施⇒ 登録完了画面を開く
+Route::post('open_edit_os','RegEditOsMasterController@openEditOs'); //　OSマスタ検索結果リストのEditボタンを押下 ⇒ OSマスタ情報のEdit画面を開く
+Route::get('open_edit_os','RegEditOsMasterController@openEditOs'); //　OSマスタ検索結果リストのEditボタンを押下 ⇒ OSマスタ情報のEdit画面を開く
+Route::post('check_edit_os','RegEditOsMasterController@checkEditOs');  //登録値の入力チェックを実施⇒ 更新処理をCall
+Route::get('exe_edit_os','RegEditOsMasterController@exeEditOs'); //更新処理を実施⇒ 更新完了画面を開く
+Route::post('exe_delete_os','RegEditOsMasterController@exeDeleteOs');//削除処理を実施⇒ 削除完了画面を開く
 
-//excel
+##開発環境マスタ##
+##PG言語マスタ##
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//excel test用
 Route::get('/dango', 'DangoController@dango')->name('dango');
 Route::post('/import', 'DangoController@import')->name('import');
 Route::post('/export', 'DangoController@export')->name('export');
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/hello', [App\Http\Controllers\HelloController::class, 'index'])->name('hello')
+ ->middleware('auth');

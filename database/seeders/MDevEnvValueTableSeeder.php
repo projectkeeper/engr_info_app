@@ -18,7 +18,7 @@ class MDevEnvValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'Apache',
         'item_value'=> '0',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 0,
       ];
@@ -28,7 +28,7 @@ class MDevEnvValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'NgynX',
         'item_value'=> '1',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 1,
       ];
@@ -39,7 +39,7 @@ class MDevEnvValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'Tomcat',
         'item_value'=> '2',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 2,
       ];
@@ -49,7 +49,7 @@ class MDevEnvValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'Amazon(EC2)',
         'item_value'=> '3',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 3,
       ];
@@ -59,7 +59,7 @@ class MDevEnvValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'Unicorn',
         'item_value'=> '4',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 4,
       ];
@@ -69,7 +69,7 @@ class MDevEnvValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'その他',
         'item_value'=> '5',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 5,
       ];

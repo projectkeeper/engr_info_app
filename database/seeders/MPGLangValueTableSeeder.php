@@ -18,7 +18,7 @@ class MPGLangValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'Java',
         'item_value'=> '0',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 0,
       ];
@@ -28,7 +28,7 @@ class MPGLangValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'C/C++',
         'item_value'=> '1',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 1,
       ];
@@ -39,7 +39,7 @@ class MPGLangValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'PHP',
         'item_value'=> '2',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 2,
       ];
@@ -49,7 +49,7 @@ class MPGLangValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'PHP(FW)',
         'item_value'=> '3',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 3,
       ];
@@ -59,7 +59,7 @@ class MPGLangValueTableSeeder extends Seeder
       $param = [
         'item_name' => 'その他',
         'item_value'=> '4',
-        'owner' => 'common',
+        'owner' => 'admin',
         'status'=> '0',
         'display_order' => 4,
       ];

@@ -18,7 +18,7 @@ class MOSValueTableSeeder extends Seeder
           $param = [
             'item_name' => 'Windows Series',
             'item_value'=> '0',
-            'owner' => 'common',
+            'owner' => 'admin',
             'status'=> '0',
             'display_order' => 0,
           ];
@@ -28,7 +28,7 @@ class MOSValueTableSeeder extends Seeder
           $param = [
             'item_name' => 'RedHat Linux',
             'item_value'=> '1',
-            'owner' => 'common',
+            'owner' => 'admin',
             'status'=> '0',
             'display_order' => 1,
           ];
@@ -39,7 +39,7 @@ class MOSValueTableSeeder extends Seeder
           $param = [
             'item_name' => 'Unix',
             'item_value'=> '2',
-            'owner' => 'common',
+            'owner' => 'admin',
             'status'=> '0',
             'display_order' => 2,
           ];
@@ -49,7 +49,7 @@ class MOSValueTableSeeder extends Seeder
           $param = [
             'item_name' => 'Linux',
             'item_value'=> '3',
-            'owner' => 'common',
+            'owner' => 'admin',
             'status'=> '0',
             'display_order' => 3,
           ];
@@ -59,7 +59,7 @@ class MOSValueTableSeeder extends Seeder
           $param = [
             'item_name' => 'その他',
             'item_value'=> '4',
-            'owner' => 'common',
+            'owner' => 'admin',
             'status'=> '0',
             'display_order' => 4,
           ];

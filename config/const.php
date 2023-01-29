@@ -6,5 +6,8 @@
     //    'valid_msg_family_name' => '名前（姓）を、入力してください。知らんけど',
     //    'valid_msg_first_name' => '名前（名）を、入力してくださいね（笑）',
     //  ],
+    'master_line_num_os' => '2',
+    'master_line_num_dev_env' => '2',
+    'master_line_num_pg_lang' => '2',
   ];
  ?>

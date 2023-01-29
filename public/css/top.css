@@ -1,0 +1,240 @@
+/*　↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+* START CSS設定 for header.blade.php
+*/
+.cp_navi {
+	background-color: #ffffff;  /*white*/
+	/*border: 0.1px solid #dedede;
+	border-radius: 10px;*/
+	/*box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);*/
+	color: #888888;
+	display: block;
+	margin: 1em 1em;
+	overflow: visible;
+	width: 100%;
+	font-size: 1.2vw;
+}
+.cp_navi ul {
+	margin: 0;
+	padding: 0;
+}
+.cp_navi ul li {
+	display: inline-block;
+	list-style-type:none;
+}
+
+.cp_navi > ul > li > a > .caret {
+	border-top: 4px solid #aaaaaa;    /*文字下の線の色*/
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+	content: '';
+	display: inline-block;
+	height: 0;
+	width: 0;
+	vertical-align: middle;
+	-webkit-transition: color 0.1s linear;
+	        transition: color 0.1s linear;
+}
+.cp_navi > ul > li > a {
+	color: #aaaaaa;
+	display: block;
+	line-height: 56px;
+	padding: 0 10px;
+	text-decoration: none;
+}
+.cp_navi > ul > li:hover {
+	background-color: rgb(218, 60, 65);
+}
+.cp_navi > ul > li:hover > a {
+	color: rgb( 255, 255, 255 );
+}
+.cp_navi > ul > li:hover > a > .caret {
+	border-top-color: rgb( 255, 255, 255 );
+}
+.cp_navi > ul > li > div {
+	background-color: rgb(218, 60, 65);
+	border-top: 0;
+	border-radius: 0 0 4px 4px;
+	box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
+	display: none;
+	margin: 0;
+	opacity: 0;
+	position: absolute;
+	width: 165px;
+	visibility: hidden;
+	-webkit-transiton: opacity 0.2s;
+	       transition: opacity 0.2s;
+}
+.cp_navi > ul > li:hover > div {
+	display: block;
+	opacity: 1;
+	visibility: visible;
+}
+.cp_navi > ul > li > div ul > li {
+	display: block;
+}
+.cp_navi > ul > li > div ul > li > a {
+	color: #ffffff;
+	display: block;
+	padding: 12px 24px;
+	text-decoration: none;
+}
+.cp_navi > ul > li > div ul > li:hover > a {
+	background-color: rgba( 255, 255, 255, 0.1);
+}
+
+span {
+  position: relative;
+  top: 0px;
+  font-weight: bold;
+  color:#0e0070;
+}
+/*　↑↑↑↑↑↑↑↑↑↑↑↑*/
+
+div.box_top1 {
+    position: relative;
+    margin: 2em 0;
+    padding: 3em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+    width: 1400px;
+}
+.box_top1 .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -15px;
+    left: 10px;
+    padding: 0 15px;
+    line-height: 1;
+    font-size: 50px;
+    background: #FFF;
+    color: #148eff;
+    font-weight: bold;
+}
+.box_top1 p {
+    margin: 0;
+    padding: 0;
+}
+/*　↑↑↑↑↑↑↑↑↑↑↑↑*/
+
+/*↓↓↓↓↓ START 「よく使う機能」欄*/
+div.layout01 td {
+  display:inline-block;
+  margin-top: 20px;
+  margin-left: 60px;
+  padding-top:10px;
+  padding-bottom:10px;
+  border-radius: 4px;
+  /*border: 2px solid #241cff;
+  background-color: #030076;
+  color:#ffffff;
+  border-left: solid 6px #7a7a7a; */ /*左線*/
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  /*width:25%;*/
+  /*position:relative;
+  text-align:center;*/
+}
+
+.layout01 td:hover{
+    background-color: #ffffff;
+    /*border: 2px solid #241cff;*/
+    border-left: solid 6px #030076;/*左線*/
+    transition: .3s;
+    color:#000000;
+}
+
+.layout01 td:active{
+  box-shadow:inset 0 0 2px rgba(128, 128, 128, 0.1);
+  transform: translateY(2px);
+}
+/* ↑↑↑↑↑　END 「よく使う機能」欄*/
+
+/*START　TD:登録データ状況欄*/
+td.td_layout1 {
+  /*background-color: #bde9ba;*/
+  display: inline-block;
+  width:25%;
+  text-align: center;
+  vertical-align: middle;
+  margin-left:100px;
+  margin-top:20px;
+  font-size: 12pt;
+  border-bottom: solid 2px #364e96;/*下線*/
+}
+
+td.td_layout2 {
+  display: inline-block;
+  width:10%;
+  font-size: 12pt;
+  text-align: left;
+  vertical-align: middle;
+  color: #364e96;
+  font-weight: bold;
+  padding-left: 20px;
+  margin-top:20px;
+}
+/*↑End TD:登録データ状況欄---*/
+
+
+/* --- ↓↓↓↓↓　START「information」欄のレイアウト全体 ---*/
+div.outer-line01 {
+  position: relative;
+  margin: 2em 2em;
+  padding: 1em 1em;
+  border: solid 3px #95ccff;
+  border-radius: 10px;
+  width: 90%;
+}
+/* --- ↑↑↑↑↑　END「information」欄のレイアウト全体 ---*/
+
+/*　---↓↓↓↓↓ START「information」欄*/
+div.info-title{
+  display:inline-block;
+  border-left: 10px solid #13008f;
+  /*border-right: 10px solid #13008f; */
+  border-radius: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:5px;
+  padding-bottom:5px;
+  margin-left: 50px;
+  background-color: #ffffff;/*#e9e9ff; */
+}
+
+div.info1 ul li{
+  position: relative;
+  display:inline-block;
+  margin-top: 10px;
+  margin-left: 100px;
+  /*background-color: #e9e9ff;*/
+  /*border-right: 2px solid #13008f;*/
+  border-bottom: 5px solid #13008f;
+  width:20%;
+  border-radius:0px;
+  text-align:center;
+}
+
+div.info1 ul li:after{
+  position: absolute;
+  border-bottom: 5px solid #b3b3ff;
+  content: "";
+  top: 24px;
+  width:30%;
+  /*border-radius: 4px;*/
+  /*border-left: solid 6px #13008f;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);*/
+}
+
+div.info2 ul li{
+  position: relative;
+  display:inline-block;
+  margin-top: 10px;
+  margin-left: 100px;
+  /*background-color: #e9e9ff;*/
+  width:20%;
+  text-align:center;
+  /*border-radius: 4px;*/
+  /*border-left: solid 6px #13008f;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);*/
+
+}
+/*--- ↑↑↑↑↑　END「information」欄*/

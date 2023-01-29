@@ -31,7 +31,6 @@ class EditEngineerController extends Controller
       $pg_lang_data_list = explode(',',$engineerInfoList[0]['PG_Lang']);  //PG言語
       $dev_env_data_list = explode(',',$engineerInfoList[0]['dev_env']);  //開発環境（サーバ、クラウド）
 
-
       //画面表示用のスキル情報（画面項目）を取得する。
       $os_skill_info_list =  $request -> os_collection;
       $pg_lang_info_list =  $request -> pg_lang_collection;
@@ -43,6 +42,10 @@ class EditEngineerController extends Controller
       $dev_env_collection = self::createSkillCollection($dev_env_data_list, $dev_env_info_list); //開発環境（サーバ、クラウド）
 
 //Log::debug($os_collection);
+      //改行コードを挿入する。
+      $os_collection = self::putBrTag($os_collection);    //OS
+      $pg_lang_collection = self::putBrTag($pg_lang_collection);  //PG言語
+      $dev_env_collection = self::putBrTag($dev_env_collection);  //開発環境（サーバ、クラウド）
 
       //Viewへ連携するデータを格納する。
       $data['os_collection'] = $os_collection;  //OS
@@ -53,7 +56,9 @@ class EditEngineerController extends Controller
       return view('layout_section.layout_section_engineer.section_edit', $data);
   }
 
-
+  /**
+   画面上のチェックボックスでチェックされている項目に対して、「チェック済マーク」を付与する。
+  */
   public static function createSkillCollection($skill_db_data, $skill_collection){
 
         $index_counter = 0;
@@ -70,6 +75,24 @@ class EditEngineerController extends Controller
 
         return $skill_collection;
   }
+
+ /**
+  改行コードを挿入する。
+ */
+  public static function putBrTag($skill_collection){
+      $index_counter = 0;
+
+      foreach($skill_collection as $skill){
+
+          if( ($index_counter+1)%4 == 0){
+            $skill_collection[$index_counter][3] = "\n\n";
+          }
+
+          ++$index_counter;
+      }
+
+      return $skill_collection;
+    }
 
   /**
   編集画面　⇒　エンジニア情報 変更確認画面を開く

@@ -22,9 +22,9 @@ class CreateSkillInfoMiddleware
     {
 
       //ユーザ共通のOSデータを取得する
-      $os_data_list = m_os_value::ownerEqual('common') -> StatusEqual("0") -> get();
-      $pg_lang_data_list = m_pg_lang_value::ownerEqual('common') -> StatusEqual("0") -> get();
-      $dev_env_data_list = m_dev_env_value::ownerEqual('common') -> StatusEqual("0") -> get();
+      $os_data_list = m_os_value::ownerEqual('admin') -> StatusEqual("0") -> get();
+      $pg_lang_data_list = m_pg_lang_value::ownerEqual('admin') -> StatusEqual("0") -> get();
+      $dev_env_data_list = m_dev_env_value::ownerEqual('admin') -> StatusEqual("0") -> get();
 
 //Log::debug('os_data_list: ');
 
@@ -70,7 +70,9 @@ class CreateSkillInfoMiddleware
       return $next($request);
     }
 
-
+    /**
+     画面上のチェックボックスでチェックされている項目に対して、「チェック済マーク」を付与する。
+    */
     public static function createSkillCollection($skill_db_data, $skill_collection){
 
         $index_counter = 0;
@@ -88,6 +90,9 @@ class CreateSkillInfoMiddleware
         return $skill_collection;
     }
 
+    /**
+     改行コードを挿入する。
+    */
     public static function putBrTag($skill_collection){
         $index_counter = 0;
 

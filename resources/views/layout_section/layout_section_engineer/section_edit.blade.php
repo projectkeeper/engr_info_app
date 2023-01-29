@@ -104,6 +104,7 @@
                 @foreach ($os_collection as $key => $data)
                   <input type="checkbox" id="ch1_{{$data[1]}}" name="OS[]" value="{{$data[1]}}" {{$data[2]}}/>
                   <label for="ch1_{{$data[1]}}">{{$data[0]}}</label>
+                  {!! nl2br($data[3]) !!}
                 @endforeach
               </div>
             </td>
@@ -117,6 +118,7 @@
               @foreach ($pg_lang_collection as $key => $data)
                 <input type="checkbox" id="ch2_{{$data[1]}}" name="PG_Lang[]" value="{{$data[1]}}" {{$data[2]}} />
                 <label for="ch2_{{$data[1]}}">{{$data[0]}}</label>
+                {!! nl2br($data[3]) !!}
               @endforeach
               </div>
             </td>
@@ -130,6 +132,7 @@
               @foreach ($dev_env_collection as $key => $data)
                 <input type="checkbox" id="ch3_{{$data[1]}}" name="dev_env[]" value="{{$data[1]}}" {{$data[2]}} />
                 <label for="ch3_{{$data[1]}}">{{$data[0]}}</label>
+                {!! nl2br($data[3]) !!}
               @endforeach
               </div>
             </td>

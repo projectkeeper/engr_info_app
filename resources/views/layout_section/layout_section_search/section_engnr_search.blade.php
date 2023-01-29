@@ -9,8 +9,7 @@
 @endcomponent
 
 @section('content1')
-<p>ここが本文のコンテンツ</p>
-  <form>
+<form>
     @csrf
   <div class="box1">
       <div class="box-title">
@@ -99,6 +98,7 @@
            @foreach ($os_collection as $key => $os_data)
              <input type="checkbox" id="ch1_{{$os_data[1]}}" name="OS[]" value="{{$os_data[1]}}" {{$os_data[2]}}/>
              <label for="ch1_{{$os_data[1]}}">{{$os_data[0]}}</label>
+             {!! nl2br($os_data[3]) !!}
            @endforeach
        </div>
      </td>
@@ -112,6 +112,7 @@
          @foreach ($pg_lang_collection as $key => $pg_lang_data)
            <input type="checkbox" id="ch2_{{$pg_lang_data[1]}}" name="PG_Lang[]" value="{{$pg_lang_data[1]}}" {{$pg_lang_data[2]}} />
            <label for="ch2_{{$pg_lang_data[1]}}">{{$pg_lang_data[0]}}</label>
+           {!! nl2br($pg_lang_data[3]) !!}
          @endforeach
        </div>
      </td>
@@ -125,6 +126,7 @@
            @foreach ($dev_env_collection as $key => $dev_env_lang_data)
              <input type="checkbox" id="ch3_{{$dev_env_lang_data[1]}}" name="dev_env[]" value="{{$dev_env_lang_data[1]}}" {{$dev_env_lang_data[2]}} />
              <label for="ch3_{{$dev_env_lang_data[1]}}">{{$dev_env_lang_data[0]}}</label>
+             {!! nl2br($dev_env_lang_data[3]) !!}
            @endforeach
        </div>
      </td>

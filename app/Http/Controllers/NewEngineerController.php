@@ -111,9 +111,6 @@ public function openNewConfirm(Request $request){
   $data['pg_lang_collection'] = $pg_lang_collection;
   $data['dev_env_collection'] = $dev_env_collection;
 
-Log::debug("data");
-Log::debug($data);
-
  return view('layout_section.layout_section_engineer.section_new_confirm', $data);
  }
 

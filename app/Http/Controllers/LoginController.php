@@ -85,10 +85,13 @@ class LoginController extends Controller
 
     //$data = ['name' => 'sasaki','items' => $item, 'login_pass' => $login_pass, 'login_id' => $login_id];
     $data = ['login_pass' => $login_pass, 'login_id' => $login_id, 'userInfo' => $user_info];
-    return view('layout_section.section_top', $data);
+    return view('layout_section.top.section_top', $data);
     //return redirect('/open_login');
   }
 
+  /**
+  トップページ画面への遷移
+  */
     public function openTop(Request $request){
 
       $user_info = $request->session()->get('user_info');
@@ -99,8 +102,7 @@ class LoginController extends Controller
         $request->session()->forget('eng_data');
       }
 
-      return view('layout_section.section_top', $data);
-
+      return view('layout_section.top.section_top', $data);
     }
 
   /**

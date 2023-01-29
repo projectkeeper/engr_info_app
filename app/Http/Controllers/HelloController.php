@@ -9,9 +9,9 @@ class HelloController extends Controller
 {
 
 public function index(Request $request){
- //$data = ['name' => '$request -> name'];
+ $data = ['name' => '$request -> name'];
  //$data = ['name' => 'Shutaro Sasaki'];
- //return view('hello.index', $data);
+ return view('hello.index', $data);
  //return view('login.login', $data);
 
  }
