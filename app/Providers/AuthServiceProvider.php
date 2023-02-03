@@ -4,6 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,19 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // 「一部」だけに適用
+        Gate::define('admin', function ($user) {
+            return ($user->permission_id == 1);
+        });
+
+        // 「一部」と「通常」に適用
+        Gate::define('regular', function ($user) {
+            return ($user->permission_id <= 2);
+        });
+
+        // 「一部」と「通常」と「管理者」全てに適用
+        Gate::define('limited', function ($user) {
+            return ($user->permission_id <= 3);
+        });
     }
 }

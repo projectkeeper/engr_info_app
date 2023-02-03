@@ -20,6 +20,9 @@ class DataExportController extends Controller
         $params = $request->input(); //画面入力値
         unset($params['_token']); //_tokenに紐づく値を削除する。
 
+        //mail addr(user id)を取得する。
+        $params['email'] = $request -> session() -> get('email');
+
         //Queryを作成する -> エンジニア情報（1人分）を取得する
         $engineer_db_info = t_eng_base::getIndEngineerInfo($params)->get();
 

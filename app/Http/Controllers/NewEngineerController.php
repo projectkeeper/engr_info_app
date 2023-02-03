@@ -123,10 +123,10 @@ public function registNew(Request $request){
   $base_info = new t_eng_base;
 
   //login_idに紐づくbase_info_idで、Max値を取得する。
-  $login_id = $request->session()->get('login_id');
-  $max_base_info_id = DB::table('t_eng_bases')->where('login_id', $login_id) -> max('base_info_id');
+  $email = $request->session()->get('email');
 
-Log::debug('maxUserId++: '.$max_base_info_id);
+  //email アドレス単位で、base info id の最大値を取得する。
+  $max_base_info_id = DB::table('t_eng_bases')->where('email', $email) -> max('base_info_id');
 
   if(isset($max_base_info_id)){
        ++$max_base_info_id;
@@ -134,10 +134,9 @@ Log::debug('maxUserId++: '.$max_base_info_id);
      $max_base_info_id = config('const.initial_base_info_id');  //初期IDを設定　
   }
 
-
   //エンジニア基本情報をセッションから取得する
   $data = $request->session()->get("eng_data");
-  $data['login_id'] = $request->session()->get('login_id');
+  $data['email'] = $email;
   $data['base_info_id'] = $max_base_info_id;
   $data['dev_env'] = implode(",",$data['dev_env']);
   $data['OS'] = implode(",",$data['OS']);
@@ -157,7 +156,7 @@ Log::debug('maxUserId++: '.$max_base_info_id);
   for($i =0; $i<$data['line_num']; $i++){
     if(isset($data["pj_outline_".$i])) {
       $career = [
-        'login_id' => $request->session()->get('login_id'),
+        'email' => $email,
         'base_info_id' => $max_base_info_id,
         'career_info_id' => $i,
         'pj_outline' => $data["pj_outline_".$i],

@@ -18,7 +18,7 @@ class m_dev_env_value extends Model
         ];
 
     /**
-    OSマスタ情報（基本情報、経歴情報）を取得する。
+    開発環境マスタ情報（基本情報、経歴情報）を取得する。
     */
     //画面表示項目のオーナー
     public function scopeOwnerEqual($query, $str)

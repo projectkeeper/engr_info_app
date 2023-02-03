@@ -15,10 +15,10 @@
       <table>
         <tr>
           <td>
-            <b>Login ID</b>
+            <b>ID</b>
           </td>
           <td colspan=2>
-            {{$login_id}}
+            {{$email}}
           </td>
         </tr>
         <tr>

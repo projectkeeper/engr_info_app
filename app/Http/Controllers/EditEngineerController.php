@@ -20,6 +20,8 @@ class EditEngineerController extends Controller
       $params = $request->input(); //画面入力値
       unset($params['_token']); //_tokenに紐づく値を削除する。
 
+      $params['email'] = $request -> session() -> get('email'); 
+
       //Queryを作成する -> エンジニア情報（1人分）を取得する
       $engineerInfoList = t_eng_base::getIndEngineerInfo($params)->get();
 
@@ -150,7 +152,9 @@ class EditEngineerController extends Controller
  public function exeEdit(Request $request){
 
         //ログインIDをsessionから取得する
-        $login_id = $request->session()->get('login_id');
+        $email = $request->session()->get('email');
+
+Log::debug("email: ".$email);
 
         //エンジニア更新情報をセッションから取得する
         $data = $request->session()->get("upd_data");
@@ -159,11 +163,11 @@ class EditEngineerController extends Controller
 
         /**エンジニア基本情報を更新する*/
         //既存のエンジニア基本情報をt_eng_basesテーブルから取得する
-        $base_info = t_eng_base::where('login_id', $login_id)->where('base_info_id', $data['base_info_id'])->firstOrFail();
+        $base_info = t_eng_base::where('email', $email)->where('base_info_id', $data['base_info_id'])->firstOrFail();
 
         //画面入力値の内、エンジニア基本情報を、更新用変数に設定する
         $base_info_key = [
-          'login_id' => $login_id,
+          'email' => $email,
           'base_info_id' => $data['base_info_id'],
         ];
 
@@ -188,7 +192,7 @@ class EditEngineerController extends Controller
         //エンジニア経歴情報（実績）を更新する
         for($i =0; $i<$data['line_num']; $i++){
 
-            $career_info = t_eng_career::where('login_id', $login_id)->
+            $career_info = t_eng_career::where('email', $email)->
                                             where('base_info_id', $data['base_info_id'])->
                                               where('career_info_id', $data['career_info_id_'.$i])->
                                                 firstOrFail();
@@ -197,7 +201,7 @@ class EditEngineerController extends Controller
 
             //画面入力値の内、エンジニア経歴(実績）情報を、更新用変数に設定する
             $career_info_key = [
-              'login_id' => $login_id,
+              'email' => $email,
               'base_info_id' => $data['base_info_id'],
               'career_info_id'=> $data['career_info_id_'.$i],
             ];
@@ -275,18 +279,18 @@ class EditEngineerController extends Controller
     */
      public function exeDelete(Request $request){
 
-       //login IDをセッションから取得する
-       $login_id = $request->session()->get("login_id");
+       //mail addrをセッションから取得する
+       $email = $request->session()->get("email");
 
        //セッションから削除データを取得する
        $del_data = $request->session()->get("del_data");
 
        //論理削除対象の基本情報（base info）を取得する。
-       $base_info = t_eng_base::where('login_id', $login_id)->where('base_info_id',$del_data['base_info_id'])->where('data_status','0')->firstOrFail();
+       $base_info = t_eng_base::where('email', $email)->where('base_info_id',$del_data['base_info_id'])->where('data_status','0')->firstOrFail();
 
        //画面入力値の内、エンジニア基本情報を、更新用変数に設定する
        $base_info_key = [
-         'login_id' => $login_id,
+         'email' => $email,
          'base_info_id' => $del_data['base_info_id'],
        ];
 

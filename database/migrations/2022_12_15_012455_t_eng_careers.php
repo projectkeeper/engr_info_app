@@ -15,7 +15,7 @@ return new class extends Migration
     {
       //t_eng_bases(エンジニア基本情報)テーブル定義
       Schema::create('t_eng_careers', function (Blueprint $table) {
-        $table->string('login_id', 100);
+        $table->string('email', 100);
         $table->string('base_info_id', 100);
         $table->string('career_info_id', 100);
         $table->string('pj_outline', 200);

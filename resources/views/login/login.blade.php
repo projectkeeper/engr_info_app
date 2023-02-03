@@ -19,18 +19,18 @@
 
 <body>
 <div class="form-wrapper">
-  <h1>Sign In</h1>
+  <h1>Sign In  {{$errors->first('feed_url')}}</h1>
   <form method="post" action="/exe_login">
     @csrf
     <div class="form-item">
       <label for="email"></label>
       <!-- <input type="text" name="login_id" required="required" placeholder="ログインID"></input> -->
-      <input type="text" name="login_id" value = "{{old('login_id')}}" placeholder="ログインID"></input>
+      <input type="text" name="email" value = "{{old('email')}}" placeholder="ログインID"></input>
     </div>
     <div class="form-item">
       <label for="password"></label>
       <!--<input type="password" name="login_pass" required="required" placeholder="パスワード"></input> -->
-      <input type="password" name="login_pass" placeholder="パスワード"></input>
+      <input type="password" name="password" placeholder="パスワード"></input>
     </div>
     <div class="button-panel">
       <input type="submit" class="button" title="Sign In" value="Sign In"></input>

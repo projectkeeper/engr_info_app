@@ -154,6 +154,8 @@ OSマスタ情報検索
             <div class="btn-flat-border">
               <a href="javascript:button_press('','','','open_top')">Top画面</a>
             </div>
+          </td>
+          <td>
             <div class="btn-flat-border">
               <a href="javascript:button_press('','','','check_new_os')">新規登録</a><br>
             </div>

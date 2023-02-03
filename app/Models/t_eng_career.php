@@ -10,7 +10,7 @@ class t_eng_career extends Model
     use HasFactory;
 
     protected $fillable = [
-        'login_id',
+        'email',
         'base_info_id',
         'career_info_id',
         'pj_outline',

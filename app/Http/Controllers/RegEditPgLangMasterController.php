@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\m_pg_lang_value;   //Added 2023/1/23 S.Sasaki
 use Illuminate\Support\Facades\Log; //Added 2022/12/30 S.Sasaki
 use Illuminate\Support\Facades\Validator; //Added 2023/1/2 S.Sasaki
-use App\Models\m_os_value;        //Added 2023/1/23 S.Sasaki
 
-class RegEditOsMasterController extends Controller
+
+class RegEditPgLangMasterController extends Controller
 {
-  public function checkNewOs(Request $request){
+
+  /**
+  登録値の入力チェックを実施⇒ 登録処理をCall
+  */
+  public function checkNewPgLang(Request $request){
 
           $rules = [
               'item_name' => 'required',
@@ -21,8 +26,8 @@ class RegEditOsMasterController extends Controller
 
           //Validationメッセージ（日本語）の設定
           $messages = [
-              'item_name.required' => 'OS名を、入力してください',
-              'item_value.required' => 'OS値を、入力してください',
+              'item_name.required' => 'PG言語名を、入力してください',
+              'item_value.required' => 'PG言語Valueを、入力してください',
               'owner.required' => 'オーナーを、入力してください',
               'status.required' => 'データステータスを、入力してください',
               'display_order.required' => '表示順を、入力してください',
@@ -47,7 +52,7 @@ class RegEditOsMasterController extends Controller
 
           //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
           //return redirect('/confirm_edit');
-          return redirect('/exe_regist_new_os');
+          return redirect('/exe_regist_new_pg_lang');
           //return view('layout_section.layout_section_engineer.section_update_confirm');
   }
 
@@ -63,9 +68,9 @@ class RegEditOsMasterController extends Controller
 // }
 
   /**
-  エンジニア情報 変更確認画面⇒エンジニア情報 変更完了画面
+  登録処理を実施⇒ 登録完了画面を開く
   */
- public function exeRegistNewOs(Request $request){
+ public function exeRegistNewPgLang(Request $request){
 
         //ログインIDをsessionから取得する
         $login_id = $request->session()->get('login_id');
@@ -78,12 +83,12 @@ class RegEditOsMasterController extends Controller
         //エンジニア経歴情報（実績）を更新する
         for($i =0; $i<$data['line_num']; $i++){
 
-            //m_os_value モデルのインスタンスを生成
-            $m_os_value = new m_os_value;
+            //m_pg_lang_value モデルのインスタンスを生成
+            $m_pg_lang_value = new m_pg_lang_value;
 
             if(isset($data["item_name_".$i])) { //値が設定されているか確認する。
 
-                $os_data = [
+                $pg_lang_data = [
                   'item_name' => $data["item_name_".$i],
                   'item_value' => $data["item_value_".$i],
                   //'owner' => $data["owner_".$i],
@@ -93,7 +98,7 @@ class RegEditOsMasterController extends Controller
                 ];
 
             //更新処理を実行
-            $m_os_value->fill($os_data)->save();
+            $m_pg_lang_value->fill($pg_lang_data)->save();
           }
 
             //初期化
@@ -101,16 +106,17 @@ class RegEditOsMasterController extends Controller
         }
 
         //新規登録データを含む、全てのデータを取得する。
-        $os_value_list = $m_os_value::ownerEqual("admin")->get();
-        $data = ["os_value_list" => $os_value_list, "comp_msg" => "OSマスタの新規登録を完了しました。"];
+        $pg_lang_value_list = $m_pg_lang_value::ownerEqual("admin")->get();
+        $data = ["pg_lang_value_list" => $pg_lang_value_list, "comp_msg" => "PG言語マスタの新規登録を完了しました。"];
 
-        return view('layout_section.layout_section_master.section_os_master_complete', $data);
+        return view('layout_section.layout_section_master.section_pg_lang_master_complete', $data);
   }
 
   /**
-  OS マスタ情報 更新画面を開く
+  PG言語マスタ検索結果リストのEditボタンを押下
+    ⇒ PG言語マスタ情報のEdit画面を開く
   */
-  public function openEditOs(Request $request){
+  public function openEditPgLang(Request $request){
 
     //画面入力値を、全て取得する
     $params = $request->input(); //画面入力値
@@ -121,24 +127,24 @@ class RegEditOsMasterController extends Controller
 
     //IDに紐づくOSマスタ情報（１件）を取得する
     if(isset($params['base_info_id'])){
-      $osMasterData = m_os_value::find($params['base_info_id']);
+      $pgLangMasterData = m_pg_lang_value::find($params['base_info_id']);
     }else{
-      $osMasterData = m_os_value::find($request -> session() ->get('edit_id'));
+      $pgLangMasterData = m_pg_lang_value::find($request -> session() ->get('edit_id'));
     }
     //検索結果と画面初期値（チェックボックス）を、設定する
-    $data=['os_master_data' => $osMasterData];
+    $data=['pg_lang_master_data' => $pgLangMasterData];
 
 //Log::debug("data: ");
 //Log::debug($data);
 
     //call view
-    return view('layout_section.layout_section_master.section_edit_os_master', $data);
+    return view('layout_section.layout_section_master.section_edit_pg_lang_master', $data);
   }
 
 /**
 登録値の入力チェックを実施⇒ 更新処理をCall
 */
-  public function checkEditOs(Request $request){
+  public function checkEditPgLang(Request $request){
 
     $rules = [
         'item_name' => 'required',
@@ -149,8 +155,8 @@ class RegEditOsMasterController extends Controller
 
     //Validationメッセージ（日本語）の設定
     $messages = [
-        'item_name.required' => 'OS名を、入力してください',
-        'item_value.required' => 'OS値を、入力してください',
+        'item_name.required' => 'PG言語名を、入力してください',
+        'item_value.required' => 'PG言語の値を、入力してください',
         'status.required' => 'データステータスを、入力してください',
         'display_order.required' => '表示順を、入力してください',
     ];
@@ -180,22 +186,22 @@ class RegEditOsMasterController extends Controller
 
     //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
     //return redirect('/confirm_edit');
-    return redirect('/exe_edit_os');
+    return redirect('/exe_edit_pg_lang');
   }
 
 /**
 更新処理を実施⇒ 更新完了画面を開く
 */
-  public function exeEditOs(Request $request){
+  public function exeEditPgLang(Request $request){
 
     //エンジニア更新情報をセッションから取得する
     $data = $request->session()->get("upd_data");
 
     //IDに紐づくOSマスタ情報（１件）を取得する
-    $osMasterData = m_os_value::find($data['id']);
+    $pgLangMasterData = m_pg_lang_value::find($data['id']);
 
     //更新データの配列を作成する。
-    $os_data= [
+    $pg_lang_data= [
       "item_name" =>  $data['item_name'],
       "item_value" => $data['item_value'],
       "status" => $data['status'],
@@ -203,44 +209,44 @@ class RegEditOsMasterController extends Controller
     ];
 
     //データ更新実行
-    $osMasterData->fill($os_data)->save();
+    $pgLangMasterData->fill($pg_lang_data)->save();
 
     //更新済みデータを含む、全てのデータを取得する。
-    $os_value_list = m_os_value::ownerEqual("admin")->get();
-    $data = ["os_value_list" => $os_value_list];
+    $pg_lang_value_list = m_pg_lang_value::ownerEqual("admin")->get();
+    $data = ["pg_lang_value_list" => $pg_lang_value_list];
 
-    $data["comp_msg"] = "OSマスタの更新を完了しました。";
+    $data["comp_msg"] = "PG言語マスタの更新を完了しました。";
 
-    return view('layout_section.layout_section_master.section_os_master_complete', $data);
+    return view('layout_section.layout_section_master.section_pg_lang_master_complete', $data);
   }
 
   /**
   削除処理を実施⇒ 削除完了画面を開く
   */
-  public function exeDeleteOs(Request $request){
+  public function exeDeletePgLang(Request $request){
 
     //画面入力値を全て取得する。
     $del_data = $request->input();
     unset($del_data['_token']); //_tokenに紐づく値を削除する。
 
     //IDに紐づくOSマスタ情報（１件）を取得する
-    $osMasterData = m_os_value::find($del_data['id']);
+    $pgLangMasterData = m_pg_lang_value::find($del_data['id']);
 
     //削除データの配列を作成する。
-    $os_data= [
+    $pg_lang_data= [
       "status" => '1',
     ];
 
     //データ更新実行
-    $osMasterData->fill($os_data)->save();
+    $pgLangMasterData->fill($pg_lang_data)->save();
 
     //更新済みデータを含む、全てのデータを取得する。
-    $os_value_list = m_os_value::ownerEqual("admin")->get();
-    $data = ["os_value_list" => $os_value_list];
+    $pg_lang_value_list = m_pg_lang_value::ownerEqual("admin")->get();
+    $data = ["pg_lang_value_list" => $pg_lang_value_list];
 
-    $data["comp_msg"] = "OSマスタデータの削除を完了しました。";
+    $data["comp_msg"] = "PG言語マスタデータの削除を完了しました。";
 
-    return view('layout_section.layout_section_master.section_os_master_complete', $data);
+    return view('layout_section.layout_section_master.section_pg_lang_master_complete', $data);
 
     return;
   }

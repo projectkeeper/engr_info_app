@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
       $this -> call(MOSValueTableSeeder::class);
       $this -> call(MDevEnvValueTableSeeder::class);
       $this -> call(MPGLangValueTableSeeder::class);
+      $this -> call(PermissionTableSeeder::class);
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

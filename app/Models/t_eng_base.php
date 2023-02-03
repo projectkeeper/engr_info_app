@@ -14,7 +14,7 @@ class t_eng_base extends Model
     const VALID_MSG_REQUIRED_FIRST_NAME = '名前（名）を、入力してくださいね。知らんけど（笑）';
 
     /// 主キーカラム名を指定
-    protected $primaryKey = ['login_id','base_info_id'];
+    protected $primaryKey = ['email','base_info_id'];
 
     // increment無効化
     public $incrementing = false;
@@ -31,7 +31,7 @@ class t_eng_base extends Model
         'PG_Lang',
         'dev_env',
         'data_status',
-        'login_id',
+        'email',
         'base_info_id'];
 
     /**
@@ -180,6 +180,10 @@ class t_eng_base extends Model
       $query->Join('t_eng_careers', 't_eng_bases.base_info_id', '=', 't_eng_careers.base_info_id')
                  ->select('*');
 
+       //エンジニアの基本情報ID
+       if (isset($params['email'])){
+         $query->where('t_eng_bases.email', $params['email']);
+       }
 
       //エンジニアの基本情報ID
       if (isset($params['base_info_id'])){

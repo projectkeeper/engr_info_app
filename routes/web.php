@@ -94,8 +94,28 @@ Route::get('exe_edit_os','RegEditOsMasterController@exeEditOs'); //更新処理�
 Route::post('exe_delete_os','RegEditOsMasterController@exeDeleteOs');//削除処理を実施⇒ 削除完了画面を開く
 
 ##開発環境マスタ##
+Route::post('open_dev_env_search_master','SearchMasterController@openDevEnvSearch'); // Menu⇒開発環境マスタ情報 検索画面を開く
+Route::post('exe_dev_env_search_master','SearchMasterController@exeDevEnvSearch'); // 検索を実施⇒　開発環境マスタ情報一覧画面を開く
+Route::post('check_new_dev_env','RegEditDevEnvMasterController@checkNewDevEnv'); //登録値の入力チェックを実施⇒ 登録処理をCall
+Route::get('exe_regist_new_dev_env','RegEditDevEnvMasterController@exeRegistNewDevEnv'); //　登録処理を実施⇒ 登録完了画面を開く
+Route::post('open_edit_dev_env','RegEditDevEnvMasterController@openEditDevEnv'); //　開発環境マスタ検索結果リストのEditボタンを押下 ⇒ 開発環境マスタ情報のEdit画面を開く
+Route::get('open_edit_dev_env','RegEditDevEnvMasterController@openEditDevEnv'); //　開発環境マスタ検索結果リストのEditボタンを押下 ⇒ 開発環境マスタ情報のEdit画面を開く
+Route::post('check_edit_dev_env','RegEditDevEnvMasterController@checkEditDevEnv');  //登録値の入力チェックを実施⇒ 更新処理をCall
+Route::get('exe_edit_dev_env','RegEditDevEnvMasterController@exeEditDevEnv'); //更新処理を実施⇒ 更新完了画面を開く
+Route::post('exe_delete_dev_env','RegEditDevEnvMasterController@exeDeleteDevEnv');//削除処理を実施⇒ 削除完了画面を開く
+
 ##PG言語マスタ##
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::post('open_pg_lang_search_master','SearchMasterController@openPgLangSearch'); // Menu⇒PG言語情報 検索画面を開く
+Route::post('exe_pg_lang_search_master','SearchMasterController@exePgLangSearch'); // 検索を実施⇒　PG言語マスタ情報一覧画面を開く
+Route::post('check_new_pg_lang','RegEditPgLangMasterController@checkNewPgLang'); //　登録値の入力チェックを実施⇒ 登録処理をCall
+Route::get('exe_regist_new_pg_lang','RegEditPgLangMasterController@exeRegistNewPgLang'); //　登録処理を実施⇒ 登録完了画面を開く
+Route::post('open_edit_pg_lang','RegEditPgLangMasterController@openEditPgLang'); //　PG言語マスタ検索結果リストのEditボタンを押下 ⇒ PG言語マスタ情報のEdit画面を開く
+Route::get('open_edit_pg_lang','RegEditPgLangMasterController@openEditPgLang'); //　PG言語マスタ検索結果リストのEditボタンを押下 ⇒ PG言語マスタ情報のEdit画面を開く
+Route::post('check_edit_pg_lang','RegEditPgLangMasterController@checkEditPgLang');  //登録値の入力チェックを実施⇒ 更新処理をCall
+Route::get('exe_edit_pg_lang','RegEditPgLangMasterController@exeEditPgLang'); //更新処理を実施⇒ 更新完了画面を開く
+Route::post('exe_delete_pg_lang','RegEditPgLangMasterController@exeDeletePgLang');//削除処理を実施⇒ 削除完了画面を開く
+
 
 //excel test用
 Route::get('/dango', 'DangoController@dango')->name('dango');

@@ -29,7 +29,7 @@ PG言語マスタ情報検索
       </td>
       <td>
         <div class="iptxt">
-          <input type="text" name="item_name" value = "{{old('item_name')}}" placeholder="OS名"></input>
+          <input type="text" name="item_name" value = "{{old('item_name')}}" placeholder="PG言語"></input>
         </div>
       </td>
     </tr>
@@ -46,7 +46,7 @@ PG言語マスタ情報検索
         </td>
         <td>
           <div class="btn-flat-border">
-            <a href="javascript:button_press('','','','exe_os_search_master')">検索</a>
+            <a href="javascript:button_press('','','','exe_pg_lang_search_master')">検索</a>
           </div>
        </td>
      </tr>
@@ -58,7 +58,7 @@ PG言語マスタ情報検索
       <table border=0>
         <tr>
           <td class="item_label_3">
-            <b>OS名</b>
+            <b>PG言語</b>
           </td>
           <td class="item_label_3">
             <b>オーナー</b>
@@ -98,19 +98,59 @@ PG言語マスタ情報検索
             </td>
             <td class="{{$class_item}}" >
               <div class="btn-flat-border">
-                <a href="javascript:button_press('','','{{$data['id']}}','open_edit_os')">更新</a><br>
+                <a href="javascript:button_press('','','{{$data['id']}}','open_edit_pg_lang')">更新</a><br>
               </div>
             </td>
           <tr>
       @endforeach
+
+      @for ($i = 0; $i < config('const.master_line_num_pg_lang'); $i++)
+        @php
+          $switch = ++$switch % 2;
+          $class_item ="item_value_3_".$switch;
+        @endphp
+        <tr>
+          <td class="{{$class_item}}">
+            <div class="iptxt">
+              <input type="text" name="item_name_{{$i}}" value = "" placeholder="PG言語"/>
+            </div>
+          </td>
+          <td class="{{$class_item}}">
+            <div class="iptxt">
+              <input type="text" name="item_value_{{$i}}" value = "" placeholder="PG言語の値"/>
+            </div>
+          </td>
+          <td class="{{$class_item}}">
+            <div class="iptxt">
+              <input type="text" name="status_{{$i}}" value = "" placeholder="データステータス"/>
+            </div>
+          </td>
+          <td class="{{$class_item}}">
+            <div class="iptxt">
+              <input type="text" name="display_order_{{$i}}" value = "" placeholder="表示順"/>
+            </div>
+          </td>
+          <td class="{{$class_item}}">
+              -
+          </td>
+        <tr>
+      @endfor
       </table>
     </div>
+
+    <input type="hidden" name="line_num" value= "{{config('const.master_line_num_pg_lang')}}" />
+
     <div class="box3">
       <table>
         <tr>
           <td>
             <div class="btn-flat-border">
               <a href="javascript:button_press('','','','open_top')">Top画面</a>
+            </div>
+          </td>
+          <td>
+            <div class="btn-flat-border">
+              <a href="javascript:button_press('','','','check_new_pg_lang')">新規登録</a><br>
             </div>
           </td>
         </tr>
