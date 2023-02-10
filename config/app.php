@@ -195,7 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class, //Add 2022/12/22 Sasaki
-
+        App\Providers\TopScreenServiceProvider::class, //Add 2023/2/6 Sasaki
     ],
 
     /*

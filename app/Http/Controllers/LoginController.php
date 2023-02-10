@@ -83,22 +83,9 @@ class LoginController extends Controller
                   ->withErrors($validator); //入力内容
     }
 
-    //$user_info = m_user::loginIDEqual($login_id) -> loginPassEqual($login_pass) -> first();
-
     //session に、ログイン画面で入力されたログイン情報を設定する。
     $request->session()->put('user_name', $user_info['name']);  //ログインID。ログインが正常にされた証拠
     $request->session()->put('email', $email);   //ログインID
-
-Log::debug($user_info['name']);
-Log::debug("email:".$email);
-
-    //sessionに、usersマスタに登録されているユーザ情報を設定する。
-    //$request->session()->put('first_name', $user_info->first_name);
-    //$request->session()->put('family_name', $user_info->family_name);
-    //$request->session()->put('email', $user_info->email);
-
-    //$request->session()->put('user_info', $user_info);
-
 
     //$data = ['name' => 'sasaki','items' => $item, 'login_pass' => $login_pass, 'login_id' => $login_id];
     $data = ['email' => $email, 'password' => $password, 'userInfo' => $user_info];

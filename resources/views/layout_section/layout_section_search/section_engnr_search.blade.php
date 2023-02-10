@@ -86,8 +86,19 @@
           <input type="text" name="station_nearby" value = "{{old('station_nearby')}}" placeholder="最寄り駅"/><p>
         </div>
       </td>
-      <td></td>
-      <td></td>
+      <td class="item_label_1">
+        <label>ステータス</label>
+      </td>
+      <td>
+        <div class="cp_ipcheck">
+            <input type="checkbox" id="ch4_0" name="status[]" value="0"/>
+            <label for="ch4_0">登録中</label>
+            <input type="checkbox" id="ch4_1" name="status[]" value="1"/>
+            <label for="ch4_1">公開前</label>
+            <input type="checkbox" id="ch4_2" name="status[]" value="2"/>
+            <label for="ch4_2">公開済み</label>
+        </div>
+      </td>
     </tr>
     <tr>
       <td class="item_label_1">

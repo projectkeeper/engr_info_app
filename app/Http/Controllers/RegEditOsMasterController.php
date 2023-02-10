@@ -128,9 +128,6 @@ class RegEditOsMasterController extends Controller
     //検索結果と画面初期値（チェックボックス）を、設定する
     $data=['os_master_data' => $osMasterData];
 
-//Log::debug("data: ");
-//Log::debug($data);
-
     //call view
     return view('layout_section.layout_section_master.section_edit_os_master', $data);
   }
@@ -241,7 +238,5 @@ class RegEditOsMasterController extends Controller
     $data["comp_msg"] = "OSマスタデータの削除を完了しました。";
 
     return view('layout_section.layout_section_master.section_os_master_complete', $data);
-
-    return;
   }
 }

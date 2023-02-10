@@ -33,6 +33,7 @@
             </ul>
           </div>
         </li>
+        @can('admin')
         <li>
           <a href="#">マスタ管理<span class="caret" target="_top"></span></a>
           <div style="z-index:1">
@@ -44,11 +45,14 @@
             </ul>
           </div>
         </li>
+        @endcan
         <li><a href="" target="_top">ユーザ管理<span class="caret" target="_top"></a>
           <div style="z-index:1">
             <ul>
-              <li><a href="#rabbit">新規登録</a></li>
-              <li><a href="#cat">検索・更新</a></li>
+        @can('admin')
+              <li><a href="javascript:button_press('','','','open_user_search')">一覧・登録</a></li>
+        @endcan
+              <li><a href="javascript:button_press('','','','')">ユーザ更新</a></li>
             </ul>
           </div>
         </li>
@@ -56,7 +60,7 @@
           <a href="" target="_top">お知らせ情報管理<span class="caret" target="_top"></a>
           <div style="z-index:1">
             <ul>
-              <li><a href="" target="_top">新規登録</a></li>
+              <li><a href="javascript:button_press('','','','open_info')">新規登録</a></li>
               <li><a href="" target="_top">検索・更新</a></li>
             </ul>
           </div>

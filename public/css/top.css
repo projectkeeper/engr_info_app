@@ -152,19 +152,19 @@ div.layout01 td {
 td.td_layout1 {
   /*background-color: #bde9ba;*/
   display: inline-block;
-  width:25%;
+  width:20%;
   text-align: center;
   vertical-align: middle;
-  margin-left:100px;
+  margin-left:60px;
   margin-top:20px;
-  font-size: 12pt;
+  font-size: 20pt;
   border-bottom: solid 2px #364e96;/*下線*/
 }
 
 td.td_layout2 {
   display: inline-block;
-  width:10%;
-  font-size: 12pt;
+  width:5%;
+  font-size: 20pt;
   text-align: left;
   vertical-align: middle;
   color: #364e96;
@@ -237,4 +237,49 @@ div.info2 ul li{
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);*/
 
 }
+/*--- ↑↑↑↑↑　END「information」欄*/
+
+
+/*　---↓↓↓↓↓ START「information」欄*/
+div.area_info{
+		width: 1400px;
+		height: 200px;
+		/*border: 0.1px solid;*/
+		/*overflow: scroll;*/
+		overflow-x: hidden;
+}
+
+td.info_label_1 {
+  background-color: #bde9ba;
+  text-align: center;
+  vertical-align: middle;
+	width: 200px;
+	height:80px;
+  /*padding: 5px, 0px, 5px, 0px;*/
+}
+td.info_value_1 {
+  /*background-color: #bde9ba; */
+  text-align: center;
+  vertical-align: middle;
+	width: 200px;
+	height: 80px;
+  /*padding: 5px, 0px, 5px, 0px;*/
+}
+td.info_label_2 {
+  background-color: #bde9ba;
+  text-align: center;
+  vertical-align: middle;
+	width: 500px;
+	height:80px;
+	/*padding:5px, 0px, 5px, 0px;*/
+}
+td.info_value_2 {
+  /*background-color: #bde9ba; */
+  text-align: left;
+  vertical-align: middle;
+	width: 500px;
+	height:80px;
+	/*padding: 5px, 0px, 5px, 0px;*/
+}
+
 /*--- ↑↑↑↑↑　END「information」欄*/

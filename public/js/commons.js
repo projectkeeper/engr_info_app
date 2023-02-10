@@ -34,3 +34,8 @@ if(base_info_id){
  document.forms[0].method="post";
  document.forms[0].submit();
 }
+
+//指定idのタグに、指定したvalueを設定する。
+function setValtoId(id, value) {
+  document.getElementById(id).value = value;
+}

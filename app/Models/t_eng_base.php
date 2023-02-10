@@ -47,8 +47,6 @@ class t_eng_base extends Model
       エンジニア基本情報の検索キー
       */
 
-      //ステータスフラグ。フラグが0のデータが検索対象
-      $query->where('t_eng_bases.data_status', '0');
 
       //氏名（名）
       if (isset($params['first_name'])){
@@ -91,6 +89,27 @@ class t_eng_base extends Model
 
 //Log::debug('OS');
 //Log::debug($params['OS']);
+
+      //データステータス
+      if (isset($params['status'])){
+
+        $status = $params['status'];
+
+        //変数が配列かどうか判断
+        if(is_array($params['status'])) { //変数が配列の場合
+          for($i=0; $i<count($params['status']); ++$i){
+            if($i==0){
+              $query->where('t_eng_bases.data_status', $status[$i] ); // Andのlike句
+
+            }else{
+              $query->orWhere('t_eng_bases.data_status', $status[$i] ); // Orのlike句
+            }
+          }
+
+        }else{  //変数が配列でない場合
+              $query->where('t_eng_bases.data_status', $status );
+        }
+      }
 
       //OS
       if (isset($params['OS'])){
@@ -191,6 +210,14 @@ class t_eng_base extends Model
       }
 
       return $query;
+    }
+
+    /**
+    ステータスごとの基本情報を取得する。
+    */
+    public function scopeEngineerInfoAsPerStatus($query, $data_status)
+    {
+      $query->where('data_status', $data_status);
     }
 
 /*

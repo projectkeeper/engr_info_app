@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             //$table->integer('permission_id')->unsigned()->comment('権限ID');
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
+            //$table->char('status', 10)->comment('データステータス');
         });
     }
 

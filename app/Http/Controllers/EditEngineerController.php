@@ -20,13 +20,16 @@ class EditEngineerController extends Controller
       $params = $request->input(); //画面入力値
       unset($params['_token']); //_tokenに紐づく値を削除する。
 
-      $params['email'] = $request -> session() -> get('email'); 
+      $params['email'] = $request -> session() -> get('email');
 
       //Queryを作成する -> エンジニア情報（1人分）を取得する
       $engineerInfoList = t_eng_base::getIndEngineerInfo($params)->get();
 
       //検索結果と画面初期値（チェックボックス）を、設定する
       $data=['engineerInfoList' => $engineerInfoList];
+
+//Log::debug("engineerInfoList0 OS: ");
+//Log::debug($engineerInfoList[0]['OS']);
 
       //DBデータのスキル情報を取得し、String(カンマ区切り)⇒配列に変換する。(理由）画面に表示させるため。
       $os_skill_data_list = explode(',',$engineerInfoList[0]['OS']);    //OS情報

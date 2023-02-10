@@ -43,7 +43,7 @@
             <td>
               <div class="iptxt">
                 <input type="text" name='first_name' value = "{{$engineerInfo['first_name']}}" placeholder="名前（名）"/>
-            </div>
+              </div>
             </td>
           </tr>
           <tr>
@@ -92,8 +92,20 @@
                 <input type="text" name="station_nearby" value = "{{$engineerInfo['station_nearby']}}" placeholder="最寄り駅"/>
               </div>
             </td>
-            <td></td>
-            <td></td>
+            <td class="item_label_3">
+                データステータス
+            </td>
+            <td>
+                <div class="cp_ipcheck">
+                    <input type="checkbox" id="ch4_0" name="status[]" value="0" {{$engineerInfo['data_status'] == 0? 'checked':''}}/>
+                    <label for="ch4_0">登録中</label>
+                    <input type="checkbox" id="ch4_1" name="status[]" value="1" {{$engineerInfo['data_status'] == 1? 'checked':''}}/>
+                    <label for="ch4_1">公開前</label>
+                    <input type="checkbox" id="ch4_2" name="status[]" value="2" {{$engineerInfo['data_status'] == 2? 'checked':''}}/>
+                    <label for="ch4_2">公開済み</label>
+                </div>
+            </td>
+
           </tr>
           <tr>
             <td class="item_label_3">
@@ -139,7 +151,6 @@
           </tr>
         </table>
     </div>
-
           @php
             $base_info_flag = 1;
           @endphp

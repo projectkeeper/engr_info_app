@@ -29,6 +29,8 @@ class SearchEngineerController extends Controller
        //画面入力値（検索キー）を、全て取得する
        $params = $request->input(); //画面入力値
        unset($params['_token']); //_tokenに紐づく値を削除する。
+Log::debug("params: ");
+Log::debug($params);
 
        //Queryを作成する
        $engineer_info = t_eng_base::engineerSearch($params)->get();

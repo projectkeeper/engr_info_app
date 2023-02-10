@@ -141,7 +141,7 @@ public function registNew(Request $request){
   $data['dev_env'] = implode(",",$data['dev_env']);
   $data['OS'] = implode(",",$data['OS']);
   $data['PG_Lang'] = implode(",",$data['PG_Lang']);
-  $data['data_status'] = "0";
+  $data['data_status'] = "2";  
 
    //エンジニアの基本情報をDBへ登録する。
    $base_info->fill($data)->save(); //登録実行

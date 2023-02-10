@@ -9,5 +9,6 @@
     'master_line_num_os' => '2',
     'master_line_num_dev_env' => '2',
     'master_line_num_pg_lang' => '2',
+    'master_line_num_user' => '2',
   ];
  ?>

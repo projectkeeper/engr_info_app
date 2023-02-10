@@ -79,10 +79,24 @@ Route::post('exe_delete','EditEngineerController@exeDelete'); // エンジニア
 Route::post('export_career_history', 'DataExportController@export_career_history'); // エンジニア情報 変更画面⇒エンジニア情報 エクセルファイルに出力する
 
 /**
+ユーザ情報更新、削除
+*/
+Route::post('open_user_search','SearchUserController@openUserSearch'); // Menu⇒ユーザ情報 検索画面を開く
+Route::post('exe_user_search','SearchUserController@exeUserSearch'); // 検索を実施⇒　ユーザマスタ情報一覧画面を開く
+Route::post('check_new_user','RegEditUserMasterController@checkNewUser'); //　登録値の入力チェックを実施⇒ 登録処理をCall
+Route::get('exe_regist_new_user','RegEditUserMasterController@exeRegistNewUser'); //　登録処理を実施⇒ 登録完了画面を開く
+Route::post('open_edit_user','RegEditUserMasterController@openEditUser'); //　ユーザマスタ検索結果リストのEditボタンを押下 ⇒ ユーザマスタ情報のEdit画面を開く
+Route::get('open_edit_user','RegEditUserMasterController@openEditUser'); //　ユーザマスタ検索結果リストのEditボタンを押下 ⇒ ユーザマスタ情報のEdit画面を開く
+Route::post('check_edit_user','RegEditUserMasterController@checkEditUser');  //登録値の入力チェックを実施⇒ 更新処理をCall
+Route::get('exe_edit_user','RegEditUserMasterController@exeEditUser'); //更新処理を実施⇒ 更新完了画面を開く
+Route::post('exe_delete_user','RegEditUserMasterController@exeDeleteUser');//削除処理を実施⇒ 削除完了画面を開く
+
+
+/**
 マスタ情報更新、削除
 */
 
-##OSマスタ##
+##OSマスタ管理##
 Route::post('open_os_search_master','SearchMasterController@openOsSearch'); // Menu⇒OS情報 検索画面を開く
 Route::post('exe_os_search_master','SearchMasterController@exeOsSearch'); // 検索を実施⇒　OSマスタ情報一覧画面を開く
 Route::post('check_new_os','RegEditOsMasterController@checkNewOs'); //　登録値の入力チェックを実施⇒ 登録処理をCall
@@ -93,7 +107,7 @@ Route::post('check_edit_os','RegEditOsMasterController@checkEditOs');  //登録�
 Route::get('exe_edit_os','RegEditOsMasterController@exeEditOs'); //更新処理を実施⇒ 更新完了画面を開く
 Route::post('exe_delete_os','RegEditOsMasterController@exeDeleteOs');//削除処理を実施⇒ 削除完了画面を開く
 
-##開発環境マスタ##
+##開発環境マスタ管理##
 Route::post('open_dev_env_search_master','SearchMasterController@openDevEnvSearch'); // Menu⇒開発環境マスタ情報 検索画面を開く
 Route::post('exe_dev_env_search_master','SearchMasterController@exeDevEnvSearch'); // 検索を実施⇒　開発環境マスタ情報一覧画面を開く
 Route::post('check_new_dev_env','RegEditDevEnvMasterController@checkNewDevEnv'); //登録値の入力チェックを実施⇒ 登録処理をCall
@@ -104,7 +118,7 @@ Route::post('check_edit_dev_env','RegEditDevEnvMasterController@checkEditDevEnv'
 Route::get('exe_edit_dev_env','RegEditDevEnvMasterController@exeEditDevEnv'); //更新処理を実施⇒ 更新完了画面を開く
 Route::post('exe_delete_dev_env','RegEditDevEnvMasterController@exeDeleteDevEnv');//削除処理を実施⇒ 削除完了画面を開く
 
-##PG言語マスタ##
+##PG言語マスタ管理##
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::post('open_pg_lang_search_master','SearchMasterController@openPgLangSearch'); // Menu⇒PG言語情報 検索画面を開く
 Route::post('exe_pg_lang_search_master','SearchMasterController@exePgLangSearch'); // 検索を実施⇒　PG言語マスタ情報一覧画面を開く
@@ -116,6 +130,14 @@ Route::post('check_edit_pg_lang','RegEditPgLangMasterController@checkEditPgLang'
 Route::get('exe_edit_pg_lang','RegEditPgLangMasterController@exeEditPgLang'); //更新処理を実施⇒ 更新完了画面を開く
 Route::post('exe_delete_pg_lang','RegEditPgLangMasterController@exeDeletePgLang');//削除処理を実施⇒ 削除完了画面を開く
 
+
+##Infomationマスタ管理##
+Route::post('open_info','RegEditInformationItemController@openInfo'); //新規登録画面を開く
+Route::get('open_info','RegEditInformationItemController@openInfo'); //新規登録画面を開く
+Route::post('check_info','RegEditInformationItemController@checkInfo'); //入力チェック実施 ->確認画面
+Route::get('confirm_info','RegEditInformationItemController@openInfoConfirm');  // 確認画面を開く
+Route::post('regist_info','RegEditInformationItemController@registInfo'); // 登録処理を実施⇒完了画面を開く
+Route::post('return_info','RegEditInformationItemController@returnInfo'); // 戻る処理を実施⇒確認画面を開く
 
 //excel test用
 Route::get('/dango', 'DangoController@dango')->name('dango');
