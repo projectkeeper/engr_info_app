@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator; //Added 2023/1/2 S.Sasaki
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 
 class RegEditUserMasterController extends Controller
 {
@@ -36,16 +38,15 @@ class RegEditUserMasterController extends Controller
           //}
 
           //画面入力値を全て取得する。
-          $ins_data = $request->all();
-          unset($ins_data['_token']); //_tokenに紐づく値を削除する。
+          $mst_data = $request->all();
+          unset($mst_data['_token']); //_tokenに紐づく値を削除する。
 
           //エンジニア情報をセッションに格納する。確認画面表示、DB登録値として使用
-          $request->session()->put("ins_data",$ins_data);
+          $request->session()->put(config('const.key_name_list.key_name_mst_data'),$mst_data);
 
           //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
           //return redirect('/confirm_edit');
           return redirect('/exe_regist_new_user');
-          //return view('layout_section.layout_section_engineer.section_update_confirm');
   }
 
   /**
@@ -54,7 +55,7 @@ class RegEditUserMasterController extends Controller
 // public function confirmEdit(Request $request){
 
     //エンジニア情報をセッションから取得する
-//    $data = $request->session()->get("upd_data");
+//    $data = $request->session()->get(config('const.key_name_list.key_name_mst_data'),);
 
 //    return view('layout_section.layout_section_engineer.section_update_confirm',$data);
 // }
@@ -68,7 +69,9 @@ class RegEditUserMasterController extends Controller
         $login_id = $request->session()->get('login_id');
 
         //マスタ更新情報をセッションから取得する
-        $data = $request->session()->get("ins_data");
+        $data = $request->session()->get(config('const.key_name_list.key_name_mst_data'));
+
+        $user_value_list= [];
 
         //エンジニア経歴情報（実績）を更新する
         for($i =0; $i<$data['line_num']; $i++){
@@ -82,20 +85,28 @@ class RegEditUserMasterController extends Controller
                   'name' => $data["name_".$i],
                   'email' => $data["email_".$i],
                   'permission_id' => $data["permission_id_".$i],
+                  'status' => config('const.data_status_conf_list.data_status_conf_published'),
                   'password' =>  Hash::make( substr($data["email_".$i],0,mb_strpos($data["email_".$i],'@') ) ),
                 ];
 //Log::debug('password'.substr($data["email_".$i],0,mb_strpos($data["email_".$i],'@') ) );
                 //更新処理を実行
                 $user->fill($user_data)->save();
+
+                //登録完了メールを送信する
+                $user_data['mail_msg'] = "ユーザ情報の登録を完了しました。";
+                Mail::to('shutaro.sasaki@gmail.com')->send(new SendMail($user_data));
+
+                //画面表示用の配列に登録データを設定する
+                $user_value_list[$i] = $user_data;
             }
             //初期化
             $user_data = null;
         }
 
         //新規登録データを含む、全てのデータを取得する。
-        $user_value_list = User::get();
+        //$user_value_list = User::get();
         $data = ["user_value_list" => $user_value_list, "comp_msg" => "ユーザマスタの新規登録を完了しました。"];
-
+Log::debug($user_value_list);
         return view('layout_section.layout_section_user.section_user_complete', $data);
   }
 
@@ -148,19 +159,17 @@ class RegEditUserMasterController extends Controller
         //$request -> session() -> put('edit_id', $request->id);
         $request->merge(['edit_id' => '$request->id']);
         $data = ['edit_id' => '$request->id'];
-  //Log::debug("request: ");
-  //Log::debug($request);
         return back()
               ->withInput($data) //画面入力値
                   ->withErrors($validator); //エラー内容
       }
 
       //画面入力値を全て取得する。
-      $upd_data = $request->all();
-      unset($upd_data['_token']); //_tokenに紐づく値を削除する。
+      $mst_data = $request->all();
+      unset($mst_data['_token']); //_tokenに紐づく値を削除する。
 
       //エンジニア情報をセッションに格納する。確認画面表示、DB登録値として使用
-      $request->session()->put("upd_data",$upd_data);
+      $request->session()->put(config('const.key_name_list.key_name_mst_data'),$mst_data);
 
       //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
       //return redirect('/confirm_edit');
@@ -173,7 +182,7 @@ class RegEditUserMasterController extends Controller
   public function exeEditUser(Request $request){
 
       //エンジニア更新情報をセッションから取得する
-      $data = $request->session()->get("upd_data");
+      $data = $request->session()->get(config('const.key_name_list.key_name_mst_data'));
 
       //IDに紐づくOSマスタ情報（１件）を取得する
       $userData = User::find($data['id']);
@@ -187,11 +196,16 @@ class RegEditUserMasterController extends Controller
 
       //データ更新実行
       $userData->fill($user_data)->save();
+      
+      //削除完了メールを送信する
+      $userData['mail_msg'] = "ユーザ情報の更新を完了しました。";
+      Mail::to('shutaro.sasaki@gmail.com')->send(new SendMail($userData));
 
-      //更新済みデータを含む、全てのデータを取得する。
-      $user_value_list = User::get();
-      $data = ["user_value_list" => $user_value_list];
-
+      //更新済情報を取得する
+      $user_value_list[0] = User::find($data['id']);  
+      
+      //$user_value_list[0] = $user_value;
+      $data["user_value_list"] = $user_value_list;
       $data["comp_msg"] = "ユーザマスタの更新を完了しました。";
 
       return view('layout_section.layout_section_user.section_user_complete', $data);
@@ -211,16 +225,21 @@ class RegEditUserMasterController extends Controller
 
       //削除データの配列を作成する。
       $user_data= [
-        "status" => '1',
+        "status" => config('const.data_status_conf_list.data_status_conf_deleted'),
       ];
 
       //データ更新実行
       $userData->fill($user_data)->save();
 
-      //更新済みデータを含む、全てのデータを取得する。
-      $user_value_list = User::get();
-      $data = ["user_value_list" => $user_value_list];
+      //削除完了メールを送信する
+      $userData['mail_msg'] = "ユーザ情報の削除を完了しました。";
+      Mail::to('shutaro.sasaki@gmail.com')->send(new SendMail($userData));
 
+      //更新済みデータを取得する。
+      //$user_value_list = User::get();
+      $user_value_list[0] = $userData;
+
+      $data = ["user_value_list" => $user_value_list];
       $data["comp_msg"] = "OSマスタデータの削除を完了しました。";
 
       return view('layout_section.layout_section_user.section_user_complete', $data);

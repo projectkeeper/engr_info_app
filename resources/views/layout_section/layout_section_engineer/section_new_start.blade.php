@@ -17,7 +17,7 @@
         エンジニア基本情報
       </div>
     </label>
-    <table>
+    <table class="auto_position">
         <tr>
           <td class="item_label_1">
             <label>漢字氏名（姓）</label>
@@ -136,7 +136,7 @@
         エンジニア経歴（実績）
       </div>
     </label>
-    <table>
+    <table class="auto_position">
       @for ($i = 0; $i < $line_num; $i++)
         <tr>
           <th class="title_label_1" colspan="4">
@@ -212,7 +212,7 @@
 　<input type="hidden" name="line_num" value={{$line_num}}></input>
 
 <div class="box3">
- <table>
+ <table class="auto_position">
    <tr>
      <td>
        <div class="btn-flat-border">
@@ -221,7 +221,7 @@
      </td>
      <td>
        <div class="btn-flat-border">
-         <a href="javascript:button_press('','','','check_new')">次へ</a>
+         <a href="javascript:button_press('bt_confirm_new','','','check_new')">次へ</a>
       </div>
      </td>
    </tr>

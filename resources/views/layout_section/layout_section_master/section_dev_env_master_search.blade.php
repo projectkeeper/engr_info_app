@@ -17,7 +17,7 @@
           サーバ・クラウド マスタ情報検索
         </label>
       </div>
-  <table>
+  <table class="auto_position">
     <th class="title_label_1" colspan="4">
       <label>
           サーバ・クラウド マスタ情報の検索キー
@@ -37,7 +37,7 @@
 </div>
 
   <div class="box3">
-    <table>
+    <table class="auto_position">
       <tr>
         <td>
           <div class="btn-flat-border">
@@ -55,7 +55,7 @@
 
 @isset($master_info)
     <div class="box3">
-      <table border=0>
+      <table class="auto_position">
         <tr>
           <td class="item_label_3">
             <b>開発環境名</b>
@@ -137,7 +137,7 @@
       </table>
     </div>
     <div class="box3">
-      <table>
+      <table class="auto_position">
         <tr>
           <td>
             <div class="btn-flat-border">

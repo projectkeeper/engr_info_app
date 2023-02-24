@@ -17,7 +17,7 @@
           エンジニア情報検索
         </label>
       </div>
-  <table>
+  <table class="auto_position">
     <th class="title_label_1" colspan="4">
       <label>
           エンジニア基本情報の検索キー
@@ -86,10 +86,14 @@
           <input type="text" name="station_nearby" value = "{{old('station_nearby')}}" placeholder="最寄り駅"/><p>
         </div>
       </td>
+      <td></td>
+      <td></td>
+    <tr>
+    </tr>   
       <td class="item_label_1">
-        <label>ステータス</label>
-      </td>
-      <td>
+        <label>エンジニア情報<br>ステータス</label>
+      </td> 
+      <td colspan="3">
         <div class="cp_ipcheck">
             <input type="checkbox" id="ch4_0" name="status[]" value="0"/>
             <label for="ch4_0">登録中</label>
@@ -97,6 +101,8 @@
             <label for="ch4_1">公開前</label>
             <input type="checkbox" id="ch4_2" name="status[]" value="2"/>
             <label for="ch4_2">公開済み</label>
+            <input type="checkbox" id="ch4_3" name="status[]" value="3"/>
+            <label for="ch4_3">削除済み</label>
         </div>
       </td>
     </tr>
@@ -220,7 +226,7 @@
 </div>
 
   <div class="box3">
-    <table>
+    <table class="auto_position">
       <tr>
         <td>
           <div class="btn-flat-border">
@@ -238,7 +244,7 @@
 
 @isset($searchResultList)
     <div class="box3">
-      <table border=0>
+      <table class="auto_position">
         <tr>
           <td class="item_label_3">
             <b>基本情報ID<br>(base_info_id)</b>
@@ -310,7 +316,7 @@
             </td>
             <td class="{{$class_item}}" rowspan="4">
               <div class="btn-flat-border">
-                <a href="javascript:button_press('','','{{$searchResult['base_info_id']}}','open_edit')">詳細</a><br>
+                <a href="javascript:button_press('bt_open_edit','','{{$searchResult['base_info_id']}}','open_edit')">詳細</a><br>
               </div>
             </td>
           <tr>
@@ -340,7 +346,7 @@
       </table>
     </div>
     <div class="box3">
-      <table>
+      <table class="auto_position">
         <tr>
           <td>
             <div class="btn-flat-border">

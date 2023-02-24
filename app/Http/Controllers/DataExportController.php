@@ -11,20 +11,23 @@ use App\Models\t_eng_base;
 
 class DataExportController extends Controller
 {
-    //
+    /*
+    * 経歴情報を作成し、エクセルに出力する
+    */
     public function export_career_history(Request $request){
+      
       #エクセルのテンプレートファイルのPathを指示
       $excel_file = storage_path('app/Excel_format/Template_EngineerCareer.xlsx');
 
-        //画面入力値を、全て取得する
-        $params = $request->input(); //画面入力値
-        unset($params['_token']); //_tokenに紐づく値を削除する。
+      //画面入力値を、全て取得する
+      $params = $request->input(); //画面入力値
+      unset($params['_token']); //_tokenに紐づく値を削除する。
 
-        //mail addr(user id)を取得する。
-        $params['email'] = $request -> session() -> get('email');
+      //mail addr(user id)を取得する。
+      $params['email'] = $request -> session() -> get('email');
 
-        //Queryを作成する -> エンジニア情報（1人分）を取得する
-        $engineer_db_info = t_eng_base::getIndEngineerInfo($params)->get();
+      //Queryを作成する -> エンジニア情報（1人分）を取得する。
+      $engineer_db_info = t_eng_base::getIndEngineerInfo($params)->get();
 
       //エクセルオブジェクト設定と出力データの設定
       $spreadsheet = self::set_export_data($excel_file, $engineer_db_info);
@@ -43,9 +46,8 @@ class DataExportController extends Controller
       header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
       header('Content-Disposition: attachment; filename="'. $filename .'"');
 
-      #エクセルファイルをダウンロードする
+      #エクセルファイルを、ダウンロードフォルダにダウンロードする
       $writer->save('php://output');
-//Log::debug('savepath: '.$savepath);
 
       #Viewに連携するデータを設定
       //$data = [
@@ -56,7 +58,7 @@ class DataExportController extends Controller
     }
 
       /**
-        エクセルテンプレートの読み込みと、出力値の設定
+       * エクセルテンプレートの読み込みと、出力値の設定
       */
       public static function set_export_data($excel_file,$engineer_db_info){
 
@@ -67,11 +69,7 @@ class DataExportController extends Controller
       #エクセルのテンプレートファイル上の、アクティブシートオブジェクトの取得
       $sheet = $spreadsheet->getActiveSheet();
 
-Log::debug($engineer_db_info);
-
       #指定箇所に文字列を出力する
-      //$sheet->setCellValue('C2','佐々木秀太郎');
-      //$sheet->setCellValue('C3','ササキ シュウタロウ');
       $sheet->setCellValue('D3', $engineer_db_info[0]['family_name'].$engineer_db_info[0]['first_name']);
       $sheet->setCellValue('D4', $engineer_db_info[0]['family_name_kana'].$engineer_db_info[0]['first_name_kana']);
       $sheet->setCellValue('D5', $engineer_db_info[0]['certificates']);

@@ -12,7 +12,7 @@
 <div class="box4">
     <div class="box-title">エンジニア情報の登録を完了しました。</div>
     <p>
-      <table>
+      <table class="auto_position">
         <tr>
           <td>
             <b>ID</b>
@@ -50,7 +50,7 @@
   <form>
     @csrf
 <div class="box3">
- <table>
+ <table class="auto_position">
    <tr>
      <td>
       <div class="btn-flat-border">
@@ -60,8 +60,7 @@
   </tr>
  <table>
 </div>
-
-  </form>
+</form>
 
 @endsection
 

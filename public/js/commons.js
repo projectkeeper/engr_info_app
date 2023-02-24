@@ -6,8 +6,8 @@ alert('hello3' + action_name);
 if(button_id){
  var ele = document.createElement('input');
  ele.setAttribute('type', 'hidden');
- ele.setAttribute('name',  button_id);
- ele.setAttribute('value', 'OK');
+ ele.setAttribute('name',  'button_id');
+ ele.setAttribute('value', button_id);
  document.forms[0].appendChild(ele);　// 要素を追加
 }
 

@@ -43,16 +43,15 @@ class RegEditDevEnvMasterController extends Controller
           //}
 
           //画面入力値を全て取得する。
-          $upd_data = $request->all();
-          unset($upd_data['_token']); //_tokenに紐づく値を削除する。
+          $mst_data = $request->all();
+          unset($mst_data['_token']); //_tokenに紐づく値を削除する。
 
           //エンジニア情報をセッションに格納する。確認画面表示、DB登録値として使用
-          $request->session()->put("upd_data",$upd_data);
+          $request->session()->put(config('const.key_name_list.key_name_mst_data'),$mst_data);
 
           //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
           //return redirect('/confirm_edit');
           return redirect('/exe_regist_new_dev_env');
-          //return view('layout_section.layout_section_engineer.section_update_confirm');
   }
 
   /*
@@ -61,7 +60,7 @@ class RegEditDevEnvMasterController extends Controller
 // public function confirmEdit(Request $request){
 
     //エンジニア情報をセッションから取得する
-//    $data = $request->session()->get("upd_data");
+//    $data = $request->session()->get(config('const.key_name_list.key_name_mst_data'));
 
 //    return view('layout_section.layout_section_engineer.section_update_confirm',$data);
 // }
@@ -75,7 +74,7 @@ class RegEditDevEnvMasterController extends Controller
         $login_id = $request->session()->get('login_id');
 
         //マスタ更新情報をセッションから取得する
-        $data = $request->session()->get("upd_data");
+        $data = $request->session()->get(config('const.key_name_list.key_name_mst_data'));
 
 //Log::debug($data);
 
@@ -121,9 +120,6 @@ class RegEditDevEnvMasterController extends Controller
     $params = $request->input(); //画面入力値
     unset($params['_token']); //_tokenに紐づく値を削除する。
 
-//Log::debug("params: ");
-//Log::debug($params);
-
     //IDに紐づく開発環境マスタ情報（１件）を取得する
     if(isset($params['base_info_id'])){
       $devEnvMasterData = m_dev_env_value::find($params['base_info_id']);
@@ -133,16 +129,13 @@ class RegEditDevEnvMasterController extends Controller
     //検索結果と画面初期値（チェックボックス）を、設定する
     $data=['dev_env_master_data' => $devEnvMasterData];
 
-//Log::debug("data: ");
-//Log::debug($data);
-
     //call view
     return view('layout_section.layout_section_master.section_edit_dev_env_master', $data);
   }
 
-/**
-登録値の入力チェックを実施⇒ 更新処理をCall
-*/
+  /**
+  登録値の入力チェックを実施⇒ 更新処理をCall
+  */
   public function checkEditDevEnv(Request $request){
 
     $rules = [
@@ -177,11 +170,11 @@ class RegEditDevEnvMasterController extends Controller
     }
 
     //画面入力値を全て取得する。
-    $upd_data = $request->all();
-    unset($upd_data['_token']); //_tokenに紐づく値を削除する。
+    $mst_data = $request->all();
+    unset($mst_data['_token']); //_tokenに紐づく値を削除する。
 
     //エンジニア情報をセッションに格納する。確認画面表示、DB登録値として使用
-    $request->session()->put("upd_data",$upd_data);
+    $request->session()->put(config('const.key_name_list.key_name_mst_data'),$mst_data);
 
     //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
     //return redirect('/confirm_edit');
@@ -194,7 +187,7 @@ class RegEditDevEnvMasterController extends Controller
   public function exeEditDevEnv(Request $request){
 
     //エンジニア更新情報をセッションから取得する
-    $data = $request->session()->get("upd_data");
+    $data = $request->session()->get(config('const.key_name_list.key_name_mst_data'));
 
     //IDに紐づくOSマスタ情報（１件）を取得する
     $devEnvMasterData = m_dev_env_value::find($data['id']);
@@ -233,14 +226,15 @@ class RegEditDevEnvMasterController extends Controller
 
     //削除データの配列を作成する。
     $dev_env_data= [
-      "status" => '1',
+      "status" => config('const.data_status_conf_list.data_status_conf_deleted'),
     ];
 
     //データ更新実行
     $devEnvMasterData->fill($dev_env_data)->save();
 
     //更新済みデータを含む、全てのデータを取得する。
-    $dev_env_value_list = m_dev_env_value::ownerEqual("admin")->get();
+    //$dev_env_value_list = m_dev_env_value::ownerEqual("admin")->get();
+    $dev_env_value_list = m_dev_env_value::get(); //全データ抽出
     $data = ["dev_env_value_list" => $dev_env_value_list];
 
     $data["comp_msg"] = "開発環境マスタデータの削除を完了しました。";

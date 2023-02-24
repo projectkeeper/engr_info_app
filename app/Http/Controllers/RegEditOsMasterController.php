@@ -39,16 +39,15 @@ class RegEditOsMasterController extends Controller
           //}
 
           //画面入力値を全て取得する。
-          $upd_data = $request->all();
-          unset($upd_data['_token']); //_tokenに紐づく値を削除する。
+          $mst_data = $request->all();
+          unset($mst_data['_token']); //_tokenに紐づく値を削除する。
 
           //エンジニア情報をセッションに格納する。確認画面表示、DB登録値として使用
-          $request->session()->put("upd_data",$upd_data);
+          $request->session()->put(config('const.key_name_list.key_name_mst_data'),$mst_data);
 
           //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
           //return redirect('/confirm_edit');
           return redirect('/exe_regist_new_os');
-          //return view('layout_section.layout_section_engineer.section_update_confirm');
   }
 
   /*
@@ -57,7 +56,7 @@ class RegEditOsMasterController extends Controller
 // public function confirmEdit(Request $request){
 
     //エンジニア情報をセッションから取得する
-//    $data = $request->session()->get("upd_data");
+//    $data = $request->session()->get(config('const.key_name_list.key_name_mst_data'));
 
 //    return view('layout_section.layout_section_engineer.section_update_confirm',$data);
 // }
@@ -71,7 +70,7 @@ class RegEditOsMasterController extends Controller
         $login_id = $request->session()->get('login_id');
 
         //マスタ更新情報をセッションから取得する
-        $data = $request->session()->get("upd_data");
+        $data = $request->session()->get(config('const.key_name_list.key_name_mst_data'));
 
 //Log::debug($data);
 
@@ -116,9 +115,6 @@ class RegEditOsMasterController extends Controller
     $params = $request->input(); //画面入力値
     unset($params['_token']); //_tokenに紐づく値を削除する。
 
-//Log::debug("params: ");
-//Log::debug($params);
-
     //IDに紐づくOSマスタ情報（１件）を取得する
     if(isset($params['base_info_id'])){
       $osMasterData = m_os_value::find($params['base_info_id']);
@@ -161,19 +157,18 @@ class RegEditOsMasterController extends Controller
       //$request -> session() -> put('edit_id', $request->id);
       $request->merge(['edit_id' => '$request->id']);
       $data = ['edit_id' => '$request->id'];
-//Log::debug("request: ");
-//Log::debug($request);
+
       return back()
             ->withInput($data) //画面入力値
                 ->withErrors($validator); //エラー内容
     }
 
     //画面入力値を全て取得する。
-    $upd_data = $request->all();
-    unset($upd_data['_token']); //_tokenに紐づく値を削除する。
+    $mst_data = $request->all();
+    unset($mst_data['_token']); //_tokenに紐づく値を削除する。
 
     //エンジニア情報をセッションに格納する。確認画面表示、DB登録値として使用
-    $request->session()->put("upd_data",$upd_data);
+    $request->session()->put(config('const.key_name_list.key_name_mst_data'),$mst_data);
 
     //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
     //return redirect('/confirm_edit');
@@ -186,7 +181,7 @@ class RegEditOsMasterController extends Controller
   public function exeEditOs(Request $request){
 
     //エンジニア更新情報をセッションから取得する
-    $data = $request->session()->get("upd_data");
+    $data = $request->session()->get(config('const.key_name_list.key_name_mst_data'));
 
     //IDに紐づくOSマスタ情報（１件）を取得する
     $osMasterData = m_os_value::find($data['id']);
@@ -225,14 +220,15 @@ class RegEditOsMasterController extends Controller
 
     //削除データの配列を作成する。
     $os_data= [
-      "status" => '1',
+      "status" => config('const.data_status_conf_list.data_status_conf_deleted'),
     ];
 
     //データ更新実行
     $osMasterData->fill($os_data)->save();
 
     //更新済みデータを含む、全てのデータを取得する。
-    $os_value_list = m_os_value::ownerEqual("admin")->get();
+    //$os_value_list = m_os_value::ownerEqual("admin")->get();
+    $os_value_list = m_os_value::get(); //全データ抽出
     $data = ["os_value_list" => $os_value_list];
 
     $data["comp_msg"] = "OSマスタデータの削除を完了しました。";

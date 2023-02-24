@@ -22,12 +22,16 @@ class PermissionTableSeeder extends Seeder
           ],
           [
               // id = 2
-              'name' => 'regular',
+              'name' => 'lead_sales',
           ],
           [
               // id = 3
-              'name' => 'limitted',
+              'name' => 'engineer',
           ],
+          [
+            // id = 4
+            'name' => 'guest',
+        ],
       ]);
     }
 }

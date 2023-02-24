@@ -17,7 +17,7 @@
       Information情報登録
     </div>
   </label>
-  <table>
+  <table class="auto_position">
       <tr>
         <td class="item_label_1">
           <label>タイトル</label>
@@ -69,7 +69,7 @@
 <form>
   @csrf
   <div class="box3">
-   <table>
+   <table class="auto_position">
      <tr>
        <td>
          <div class="btn-flat-border">

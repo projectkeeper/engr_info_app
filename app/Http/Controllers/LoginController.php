@@ -35,7 +35,7 @@ class LoginController extends Controller
   //Validationメッセージ（日本語）の設定
   $messages = [
       'login_id.required' => 'ログインIDを、入力してください',
-      'login_pass.required' => 'ログインPWを、入力してください',
+      'password.required' => 'ログインPWを、入力してください',
       //'login_id.exists' => 'LoginIDが、間違っています。',
       //'login_pass.exists' => 'ログインPWが、間違っています',
   ];
@@ -72,10 +72,10 @@ class LoginController extends Controller
     $email = $request -> email;
     $password =  $request -> password;
 
-    if(Auth::attempt(['email' => $email, 'password' => $password])){
+    if(Auth::attempt(['email' => $email, 'password' => $password, 
+        'status' => config('const.data_status_conf_list.data_status_conf_published')])){
       $user_info = User::emailEqual($email) -> first();
 
-//Log::debug("ログイン成功!!");
     }else{
       $validator->errors()->add('login_error', 'メールアドレス・パスワードが正しくありません。');
           return back() //遷移元画面（ログイン画面）へ遷移
@@ -86,11 +86,12 @@ class LoginController extends Controller
     //session に、ログイン画面で入力されたログイン情報を設定する。
     $request->session()->put('user_name', $user_info['name']);  //ログインID。ログインが正常にされた証拠
     $request->session()->put('email', $email);   //ログインID
+    $request->session()->put('permission_id', $user_info['permission_id']);   //ユーザ権限
+    $request->session()->put('id', $user_info['id']);   //ユーザ権限
 
-    //$data = ['name' => 'sasaki','items' => $item, 'login_pass' => $login_pass, 'login_id' => $login_id];
+
     $data = ['email' => $email, 'password' => $password, 'userInfo' => $user_info];
     return view('layout_section.top.section_top', $data);
-    //return redirect('/open_login');
   }
 
   /**

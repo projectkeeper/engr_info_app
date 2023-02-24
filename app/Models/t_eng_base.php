@@ -40,41 +40,47 @@ class t_eng_base extends Model
     public function scopeEngineerSearch($query, $params)
     {
 
-      $query->Join('t_eng_careers', 't_eng_bases.base_info_id', '=', 't_eng_careers.base_info_id')
-                 ->select('*');
-
+      $query->Join('t_eng_careers', function($join) {
+        $join->on('t_eng_bases.base_info_id', '=', 't_eng_careers.base_info_id') 
+          ->on('t_eng_bases.email', '=', 't_eng_careers.email');      
+      });
+      
       /*
       エンジニア基本情報の検索キー
       */
 
+      //Email(Login ID)  
+      if (isset($params['email'])){
+        $query->where('t_eng_bases.email', $params['email']);
+      }
 
       //氏名（名）
       if (isset($params['first_name'])){
         //$query->where(function ($query) use ($params) {
-        $query->where('first_name', $params['first_name']);
+        $query->where('first_name', 'LIKE', '%'.$params['first_name'].'%');
         //});
       }
 
       //氏名（姓）
       if (isset($params['family_name'])){
-        $query->where('family_name', $params['family_name']);
+        $query->where('family_name', 'LIKE', '%'.$params['family_name'].'%');
       }
 
       //カナ名（名）
       if (isset($params['first_name_kana'])){
         //$query->where(function ($query) use ($params) {
-        $query->where('first_name_kana', $params['first_name_kana']);
+        $query->where('first_name_kana','LIKE','%'.$params['first_name_kana'].'%');
         //});
       }
 
       //カナ名（姓）
       if (isset($params['family_name_kana'])){
-        $query->where('family_name_kana', $params['family_name_kana']);
+        $query->where('family_name_kana','LIKE','%'.$params['family_name_kana'].'%');
       }
 
       //資格
       if (isset($params['certificates'])){
-        $query->where('certificates', $params['certificates']);
+        $query->where('certificates', 'LIKE','%'.$params['certificates'].'%');
       }
 
       //経験年数
@@ -84,11 +90,8 @@ class t_eng_base extends Model
 
       //最寄り駅
       if (isset($params['station_nearby'])){
-        $query->where('station_nearby', $params['station_nearby']);
+        $query->where('station_nearby', 'LIKE','%'.$params['station_nearby'].'%');
       }
-
-//Log::debug('OS');
-//Log::debug($params['OS']);
 
       //データステータス
       if (isset($params['status'])){
@@ -196,8 +199,13 @@ class t_eng_base extends Model
     public function scopeGetIndEngineerInfo($query, $params)
     {
 
-      $query->Join('t_eng_careers', 't_eng_bases.base_info_id', '=', 't_eng_careers.base_info_id')
-                 ->select('*');
+      //$query->Join('t_eng_careers', 't_eng_bases.base_info_id', '=', 't_eng_careers.base_info_id')
+      //           ->select('*');
+      
+      $query->Join('t_eng_careers', function($join) {
+        $join->on('t_eng_bases.base_info_id', '=', 't_eng_careers.base_info_id') 
+          ->on('t_eng_bases.email', '=', 't_eng_careers.email');      
+      });
 
        //エンジニアの基本情報ID
        if (isset($params['email'])){

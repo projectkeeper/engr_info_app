@@ -1,16 +1,16 @@
 @extends('layout_base.base_4L')
 
-@section('title', '案内情報登録完了')
+@section('title', '案内情報更新完了')
 
 @component('layout_component.component_header')
 @slot('header_title')
-案内情報登録完了
+案内情報更新完了
 @endslot
 @endcomponent
 
 @section('content1')
 <div class="box4">
-    <div class="box-title">案内情報の登録を完了しました。</div>
+    <div class="box-title">{{$comp_msg}}</div>
     <p>
       <table class="auto_position">
         <tr>

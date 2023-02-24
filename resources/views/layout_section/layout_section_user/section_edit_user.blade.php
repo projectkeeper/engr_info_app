@@ -13,7 +13,7 @@
     @csrf
 
     <div class="box3">
-      <table border=0>
+      <table class="auto_position">
         <tr>
           <td class="item_label_3">
             <b>ユーザ氏名</b>
@@ -47,7 +47,7 @@
     <input type="hidden" name="id" value= "{{$user_data['id']}}" />
 
     <div class="box3">
-      <table>
+      <table class="auto_position">
         <tr>
           <td>
             <div class="btn-flat-border">
@@ -59,11 +59,13 @@
               <a href="javascript:button_press('','','','check_edit_user')">更新</a><br>
             </div>
           </td>
+        @can('admin')
           <td>
             <div class="btn-flat-border">
               <a href="javascript:button_press('','','','exe_delete_user')">削除</a><br>
             </div>
           </td>
+        @endcan
         </tr>
       </table>
     </div>

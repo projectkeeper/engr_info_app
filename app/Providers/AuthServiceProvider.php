@@ -26,19 +26,24 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // 「一部」だけに適用
+        // 「管理者」だけに適用
         Gate::define('admin', function ($user) {
             return ($user->permission_id == 1);
         });
 
-        // 「一部」と「通常」に適用
-        Gate::define('regular', function ($user) {
+        // 「管理者」+「エンジニアリーダ/営業/業務」に適用
+        Gate::define('lead_sales', function ($user) {
             return ($user->permission_id <= 2);
         });
 
-        // 「一部」と「通常」と「管理者」全てに適用
-        Gate::define('limited', function ($user) {
+        // 「管理者」+「エンジニアリーダ/営業/業務」+「エンジニア」に適用
+        Gate::define('engineer', function ($user) {
             return ($user->permission_id <= 3);
+        });
+
+        // 「Guest」+「管理者」+「エンジニアリーダ/営業/業務」+「エンジニア」に適用
+        Gate::define('all', function ($user) {
+            return ($user->permission_id <= 4);
         });
     }
 }

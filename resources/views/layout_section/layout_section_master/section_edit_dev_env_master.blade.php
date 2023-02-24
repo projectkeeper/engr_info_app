@@ -13,7 +13,7 @@
     @csrf
 
     <div class="box3">
-      <table border=0>
+      <table class="auto_position">
         <tr>
           <td class="item_label_3">
             <b>開発環境名</b>
@@ -47,7 +47,7 @@
     <input type="hidden", name= "id" value="{{$dev_env_master_data['id']}}" />
     <!--<input type="submit" class="button" title="新規登録" value="New Regist"></input><br>-->
     <div class="box3">
-     <table>
+     <table class="auto_position">
        <tr>
          <td>
           <div class="btn-flat-border">

@@ -14,7 +14,7 @@
     @csrf
 
     <div class="box3">
-      <table border=0>
+      <table class="auto_position">
         <tr>
           <td class="item_label_3">
             <b>ユーザ氏名</b>
@@ -25,46 +25,47 @@
           <td class="item_label_3">
             <b>ユーザ権限</b>
           </td>
-        <tr>
+        </tr>
+      @php
+        $switch=0;
+      @endphp
 
+      @foreach($user_value_list as $data)
         @php
-          $switch=0;
+          $switch = ++$switch % 2;
+          $class_item ="item_value_3_".$switch;
         @endphp
-
-        @foreach($user_value_list as $data)
-          @php
-              $switch = ++$switch % 2;
-              $class_item ="item_value_3_".$switch;
-          @endphp
-            <tr>
-              <td class="{{$class_item}}">
-                  {{$data['name']}}
-              </td>
-              <td class="{{$class_item}}">
-                  {{$data['email']}}
-              </td>
-              <td class="{{$class_item}}">
-                {{$data['permission_id']}}
-              </td>
-            <tr>
-        @endforeach
+        <tr>
+          <td class="{{$class_item}}">
+              {{$data['name']}}
+          </td>
+          <td class="{{$class_item}}">
+              {{$data['email']}}
+          </td>
+          <td class="{{$class_item}}">
+            {{$data['permission_id']}}
+          </td>
+        <tr>
+      @endforeach
       </table>
     </div>
 
     <!--<input type="submit" class="button" title="新規登録" value="New Regist"></input><br>-->
     <div class="box3">
-     <table>
+     <table class="auto_position">
        <tr>
          <td>
           <div class="btn-flat-border">
             <a href="javascript:button_press('','','','open_top')">Top画面</a>
           </div>
         </td>
+      @can('admin')
         <td>
           <div class="btn-flat-border">
             <a href="javascript:button_press('','','','open_user_search')">ユーザ管理</a>
           </div>
         </td>
+      @endcan
       </tr>
      <table>
     </div>

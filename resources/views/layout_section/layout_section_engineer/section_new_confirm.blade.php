@@ -230,7 +230,7 @@
 <form>
 @csrf
   <div class="box3">
-   <table>
+   <table class="auto_position">
      <tr>
        <td>
          <div class="btn-flat-border">

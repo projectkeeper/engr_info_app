@@ -17,7 +17,7 @@ Information情報登録
         Information情報登録
       </div>
     </label>
-    <table>
+    <table class="auto_position">
         <tr>
           <td class="item_label_1">
             <label>タイトル</label>
@@ -67,7 +67,7 @@ Information情報登録
  </div>
 
 <div class="box3">
- <table>
+ <table class="auto_position">
    <tr>
      <td>
        <div class="btn-flat-border">

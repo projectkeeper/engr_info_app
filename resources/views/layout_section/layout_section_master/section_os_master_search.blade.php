@@ -17,7 +17,7 @@ OSマスタ情報検索
           OSマスタ情報検索
         </label>
       </div>
-  <table>
+  <table class="auto_position">
     <th class="title_label_1" colspan="4">
       <label>
           OSマスタ情報の検索キー
@@ -45,7 +45,7 @@ OSマスタ情報検索
 </div>
 
   <div class="box3">
-    <table>
+    <table class="auto_position">
       <tr>
         <td>
           <div class="btn-flat-border">
@@ -63,7 +63,7 @@ OSマスタ情報検索
 
 @isset($master_info)
     <div class="box3">
-      <table border=0>
+      <table class="auto_position">
         <tr>
           <td class="item_label_3">
             <b>OS名</b>
@@ -148,7 +148,7 @@ OSマスタ情報検索
     <input type="hidden" name="line_num" value= "{{config('const.master_line_num_os')}}" />
 
     <div class="box3">
-      <table>
+      <table class="auto_position">
         <tr>
           <td>
             <div class="btn-flat-border">

@@ -66,8 +66,9 @@ Route::post('exe_search_engineer','SearchEngineerController@exeSearch')
 エンジニア情報更新、削除
 */
 Route::post('open_edit','EditEngineerController@openEdit') // エンジニア情報一覧画面⇒エンジニア情報 変更画面を開く
-   ->middleware(CreateSkillInfoMiddleware::class);
-Route::get('open_edit','EditEngineerController@openEdit'); // エンジニア情報一覧画面⇒エンジニア情報 変更画面を開く
+    ->middleware(CreateSkillInfoMiddleware::class);
+Route::get('ref_eng_info/{url_eng_info_params}','EditEngineerController@refEngInfo') // エンジニア情報URL　⇒　個別エンジニア情報の参照画面を開く
+    ->middleware(CreateSkillInfoMiddleware::class);
 Route::post('check_edit','EditEngineerController@checkEdit'); // エンジニア情報変更画面で、入力チェックを実施する。⇒ リダイレクトからエンジニア情報 変更確認画面を開く
 Route::get('confirm_edit','EditEngineerController@confirmEdit'); // エンジニア情報変更画面⇒エンジニア情報 変更確認画面を開く
 Route::post('exe_edit','EditEngineerController@exeEdit'); // エンジニア情報変更確認画面⇒エンジニア情報 変更完了画面を開く
@@ -119,7 +120,6 @@ Route::get('exe_edit_dev_env','RegEditDevEnvMasterController@exeEditDevEnv'); //
 Route::post('exe_delete_dev_env','RegEditDevEnvMasterController@exeDeleteDevEnv');//削除処理を実施⇒ 削除完了画面を開く
 
 ##PG言語マスタ管理##
-////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::post('open_pg_lang_search_master','SearchMasterController@openPgLangSearch'); // Menu⇒PG言語情報 検索画面を開く
 Route::post('exe_pg_lang_search_master','SearchMasterController@exePgLangSearch'); // 検索を実施⇒　PG言語マスタ情報一覧画面を開く
 Route::post('check_new_pg_lang','RegEditPgLangMasterController@checkNewPgLang'); //　登録値の入力チェックを実施⇒ 登録処理をCall
@@ -130,7 +130,6 @@ Route::post('check_edit_pg_lang','RegEditPgLangMasterController@checkEditPgLang'
 Route::get('exe_edit_pg_lang','RegEditPgLangMasterController@exeEditPgLang'); //更新処理を実施⇒ 更新完了画面を開く
 Route::post('exe_delete_pg_lang','RegEditPgLangMasterController@exeDeletePgLang');//削除処理を実施⇒ 削除完了画面を開く
 
-
 ##Infomationマスタ管理##
 Route::post('open_info','RegEditInformationItemController@openInfo'); //新規登録画面を開く
 Route::get('open_info','RegEditInformationItemController@openInfo'); //新規登録画面を開く
@@ -138,6 +137,15 @@ Route::post('check_info','RegEditInformationItemController@checkInfo'); //入力
 Route::get('confirm_info','RegEditInformationItemController@openInfoConfirm');  // 確認画面を開く
 Route::post('regist_info','RegEditInformationItemController@registInfo'); // 登録処理を実施⇒完了画面を開く
 Route::post('return_info','RegEditInformationItemController@returnInfo'); // 戻る処理を実施⇒確認画面を開く
+Route::post('open_info_list','RegEditInformationItemController@openInfoList'); // 一覧画面を開く
+Route::post('open_info_edit','RegEditInformationItemController@openInfoEdit'); // 更新画面を開く
+Route::post('check_edit_info','RegEditInformationItemController@checkEditInfo'); // 入力チェック実施 -> 更新処理実施
+Route::get('edit_info','RegEditInformationItemController@editInfo'); // 更新処理を実施 ⇒更新完了画面を開く
+Route::post('delete_info','RegEditInformationItemController@deleteInfo'); // 削除処理を実施 ⇒削除完了画面を開く
+
+##メール機能
+Route::get('/send_reg_eng_complete', 'MailSendController@sendRegEngComplete');
+Route::post('/send_reg_eng_complete', 'MailSendController@sendRegEngComplete');
 
 //excel test用
 Route::get('/dango', 'DangoController@dango')->name('dango');

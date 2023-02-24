@@ -27,7 +27,7 @@
 
       @foreach($engineerInfoList as $engineerInfo)
         @if ($base_info_flag == 0)
-        <table>
+        <table class="auto_position">
           <tr>
             <td class="item_label_3">
               <label>名前（姓）</label>
@@ -166,7 +166,7 @@
             エンジニア経歴（実績）
         </div>
       </label>
-      <table>
+      <table class="auto_position">
         @endif
           <tr>
             <th class="title_label_1" colspan="4">
@@ -244,13 +244,23 @@
           @endphp
 
         @endforeach
+        <tr>
+          <td class="item_label_3">
+            参照用パス
+          </td>
+          <td colspan="4" style="word-break: break-word">
+            <p>{{$ref_path}}</p>
+          </td>
+          
+        </tr>
     </table>
   </div>
-    <input type="hidden" name="base_info_id" value={{$engineerInfo['base_info_id']}}></input>
-    <input type="hidden" name="line_num" value={{$line_num}}></input>
+
+  <input type="hidden" name="base_info_id" value={{$engineerInfo['base_info_id']}}></input>
+  <input type="hidden" name="line_num" value={{$line_num}}></input>
 
   <div class="box3">
-    <table>
+    <table class="auto_position">
       <tr>
        <td>
           <div class="btn-flat-border">

@@ -13,7 +13,7 @@
     @csrf
 
     <div class="box3">
-      <table border=0>
+      <table class="auto_position">
         <tr>
           <td class="item_label_3">
             <b>ユーザ氏名</b>
@@ -84,7 +84,8 @@
               </td>
               <td class="{{$class_item}}">
                 <div class="iptxt">
-                  <input type="text" name="status_{{$i}}" value = "" placeholder="ユーザ権限"/>
+                  {{config('const.data_status_conf_list.data_status_conf_published')}}
+                  <!--<input type="text" name="status_{{$i}}" value = "{{config('const.data_status_conf_list.data_status_conf_published')}}" placeholder="データステータス" readonly/>-->
                 </div>
               </td>
               <td class="{{$class_item}}">
@@ -97,7 +98,7 @@
     <input type="hidden" name="line_num" value= "{{config('const.master_line_num_user')}}" />
 
     <div class="box3">
-      <table>
+      <table class="auto_position">
         <tr>
           <td>
             <div class="btn-flat-border">

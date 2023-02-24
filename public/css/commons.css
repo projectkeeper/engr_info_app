@@ -313,11 +313,11 @@ div.box3 {
 /*--- ↑End 画面レイアウト全体 ---*/
 
 /* --- ↑Start テーブル ---*/
-table {
+table.auto_position {
     margin-left: auto;
     margin-right: auto;
 }
-/* --- ↑End テーブル ---*/
+ /*--- ↑End テーブル ---*/
 
 /* --- ↑Start TD ---*/
 td.item_label_1 {
@@ -348,6 +348,7 @@ td.item_value_2 {
 td.item_label_3 {
   background-color: #ea485c;
   text-align: center;
+  color: #FFFFFF;
   vertical-align: middle;
 	width: 250px;
 }

@@ -15,6 +15,7 @@ class m_information_item extends Model
     const VALID_MSG_REQUIRED_CONTENT = '情報内容を、入力してくださいね。知らんけど（笑）';
     const VALID_MSG_REQUIRED_FROM = '期限Fromを、入力してくださいね。知らんけど（笑）';
     const VALID_MSG_REQUIRED_TO = '期限Toを、入力してくださいね。知らんけど（笑）';
+    const VALID_MSG_REQUIRED_DISPLAY_ORDER = '表示順を、入力してくださいね。知らんけど（笑）';
 
     protected $fillable = [
         'title',
