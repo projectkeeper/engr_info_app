@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\m_os_value;        //Added 2023/1/23 S.Sasaki
-use App\Models\m_pg_lang_value;   //Added 2023/1/23 S.Sasaki
-use App\Models\m_dev_env_value;   //Added 2023/1/23 S.Sasaki
+use App\Models\m_os_value;
+use App\Models\m_pg_lang_value;
+use App\Models\m_dev_env_value;
+use App\Models\m_role;  
+use App\Models\m_export_item;
 
 class SearchMasterController extends Controller
 {
@@ -89,5 +91,35 @@ class SearchMasterController extends Controller
             $data=['master_info' => $master_info];
 
             return view('layout_section.layout_section_master.section_pg_lang_master_search',$data);
+      }
+
+      /**
+       Roleマスタ一覧情報画面を開く
+      */
+      public function openRoleInfo(Request $request){
+
+            //Queryを作成する
+            $master_info = m_role::orderBy('display_order', 'asc') -> get();
+
+            //検索結果と画面初期値（チェックボックス）を、設定する
+            $data=['master_info' => $master_info];
+
+            //画面初期値の設定
+            return view('layout_section.layout_section_master.section_role_master_search', $data);
+      }
+
+      /**
+       エクスポートデータマスタ一覧情報画面を開く
+      */
+      public function openExportItem(Request $request){
+
+            //Queryを作成する
+            $master_info = m_export_item::orderBy('display_order', 'asc') -> get();
+
+            //検索結果と画面初期値（チェックボックス）を、設定する
+            $data=['master_info' => $master_info];
+
+            //画面初期値の設定
+            return view('layout_section.layout_section_master.section_export_item_master_search', $data);
       }
 }

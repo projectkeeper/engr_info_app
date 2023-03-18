@@ -19,7 +19,8 @@ class SearchEngineerController extends Controller
             $data=[
                   'os_collection' => $request->os_collection,
                   'pg_lang_collection' => $request->pg_lang_collection,
-                  'dev_env_collection' => $request->dev_env_collection
+                  'dev_env_collection' => $request->dev_env_collection,
+                  'role_collection' => $request -> role_collection
             ];
 
             return view('layout_section.layout_section_search.section_engnr_search', $data);
@@ -45,17 +46,17 @@ class SearchEngineerController extends Controller
                   //mail addr(login id)を設定する。            
                   $params['email'] = $request -> session() -> get('email'); 
             }
-
             //Queryを作成する
             $engineer_info = t_eng_base::engineerSearch($params)->get();
 
-            //検索結果と画面初期値（チェックボックス）を、設定する
+            //検索結果と画面初期値（checkbox, radio button）を、設定する
             $data=['searchResultList' => $engineer_info,
             'os_collection' => $request->os_collection,
             'pg_lang_collection' => $request->pg_lang_collection,
-            'dev_env_collection' => $request->dev_env_collection
+            'dev_env_collection' => $request->dev_env_collection,
+            'role_collection' => $request -> role_collection
             ];
 
-      return view('layout_section.layout_section_search.section_engnr_search',$data);
+            return view('layout_section.layout_section_search.section_engnr_search',$data);
       }
 }

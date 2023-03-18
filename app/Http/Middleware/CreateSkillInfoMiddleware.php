@@ -79,35 +79,32 @@ class CreateSkillInfoMiddleware
 
           //画面入力値（検索キー）を、全て取得する
           $params = $request->input(); //画面入力値
-
-          //Log::debug("encrypt: ");
-            //Log::debug(Crypt::encrypt("shutaro.sasaki@gmail.com/5"));
             
-            //URL上の暗号化パラメータを取得する
-            $en_param = $request->url_eng_info_params;
+          //URL上の暗号化パラメータを取得する
+          $en_param = $request->url_eng_info_params;
 
-            //暗号化パラメータの暗号を解除する
-            $dec_param=Crypt::decrypt($en_param);
+          //暗号化パラメータの暗号を解除する
+          $dec_param=Crypt::decrypt($en_param);
 
-            //暗号解除したparamを、separator('/')で分割し配列にする。
-            $param_ary = explode('/',$dec_param);
+          //暗号解除したparamを、separator('/')で分割し配列にする。
+          $param_ary = explode('/',$dec_param);
 
-            //参照用のエンジニア情報に、URLからアクセスする場合
-            $params['email'] = $param_ary[0];
-            $params['base_info_id'] = $param_ary[1];
+          //参照用のエンジニア情報に、URLからアクセスする場合
+          $params['email'] = $param_ary[0];
+          $params['base_info_id'] = $param_ary[1];
 
-            $request->merge([ 
-                'email' => $param_ary[0],
-                'base_info_id'=> $param_ary[1], 
-            ]);
+          $request->merge([ 
+              'email' => $param_ary[0],
+              'base_info_id'=> $param_ary[1], 
+          ]);
 
-            //Queryを作成する -> エンジニア情報（1人分）を取得する
-            $data = t_eng_base::getIndEngineerInfo($params)->get();
+          //Queryを作成する -> エンジニア情報（1人分）を取得する
+          $data = t_eng_base::getIndEngineerInfo($params)->get();
 
-            //DBデータのスキル情報を取得し、String(カンマ区切り)⇒配列に変換する。
-            $OS = explode(',',$data[0]['OS']);    //OS情報
-            $PG_Lang = explode(',',$data[0]['PG_Lang']);  //PG言語
-            $dev_env = explode(',',$data[0]['dev_env']);  //開発環境（サーバ、クラウド）
+          //DBデータのスキル情報を取得し、String(カンマ区切り)⇒配列に変換する。
+          $OS = explode(',',$data[0]['OS']);    //OS情報
+          $PG_Lang = explode(',',$data[0]['PG_Lang']);  //PG言語
+          $dev_env = explode(',',$data[0]['dev_env']);  //開発環境（サーバ、クラウド）
 
       } //新規エンジニア登録画面の初期表示の場合、又は新規エンジニア情報確認画面の表示の場合。
       else{
@@ -140,8 +137,6 @@ class CreateSkillInfoMiddleware
       $request->merge(['os_collection' => $os_collection, 
           'pg_lang_collection' => $pg_lang_collection,
           'dev_env_collection' => $dev_env_collection,
-          //'email' => $param_ary[0],
-          //'base_info_id'=> $param_ary[1], 
         ]);
 
       return $next($request);

@@ -55,7 +55,7 @@
               <li><a href="javascript:button_press('','','','exe_os_search_master')">OS/アプリ</a></li>
               <li><a href="javascript:button_press('','','','exe_pg_lang_search_master')">PG言語</a></li>
               <li><a href="javascript:button_press('','','','exe_dev_env_search_master')">開発環境</a></li>
-              <li><a href="#rabbit">職務/役割</a></li>
+              <li><a href="javascript:button_press('','','','open_role_info')">ロール</a></li>
             </ul>
           </div>
         </li>
@@ -79,6 +79,16 @@
             <ul>
               <li><a href="javascript:button_press('','','','open_info')">新規登録</a></li>
               <li><a href="javascript:button_press('','','','open_info_list')" >一覧・更新</a></li>
+            </ul>
+          </div>
+        </li>
+      @endcan
+      @can('admin')
+        <li>
+          <a href="" target="_top">出力情報管理<span class="caret" target="_top"></a>
+          <div style="z-index:1">
+            <ul>
+              <li><a href="javascript:button_press('','','','open_export_item')">一覧・更新</a></li>
             </ul>
           </div>
         </li>

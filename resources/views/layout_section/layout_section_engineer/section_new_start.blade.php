@@ -154,21 +154,20 @@
           </td>
           <td  class="item_label_2">
              <label>職務</label>
-           </td>
-           <td class="item_value_2">
+          </td>
+          <td class="item_value_2">
             <div class="cp_ipselect cp_sl01">
-               <select name="role_{{$i}}">
-                 <option value="" >Choose</option>
-                 <option value="0" @if (old('role_'.$i) == 0) selected @endif>PG</option>
-                 <option value="1" @if (old('role_'.$i) == 1) selected @endif>SE</option>
-                 <option value="2" @if (old('role_'.$i) == 2) selected @endif>Team Lead</option>
-                 <option value="3" @if (old('role_'.$i) == 3) selected @endif>PMO</option>
-                 <option value="4" @if (old('role_'.$i) == 4) selected @endif>Other</option>
-               </select>
+              <select name="role_{{$i}}">
+                <option value="" >Choose</option>
+           
+                @foreach ($role_collection as $role)
+                  <option value="{{$role[1]}}" {{ old('role_'.$i) == $role[1]? 'selected':"" }}>{{$role[0]}}</option>
+                @endforeach
+              </select>
             </div>
           </td>
-         </tr>
-         <tr>
+        </tr>
+        <tr>
           <td  class="item_label_2">
              <label>開発環境</label>
           </td>

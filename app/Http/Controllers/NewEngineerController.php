@@ -27,6 +27,7 @@ public function openNew(Request $request){
           'os_collection' => $request->os_collection,        //「OS」蘭の項目名とValue
           'pg_lang_collection' => $request->pg_lang_collection, //「プログラミング言語」蘭の項目名とValue
           'dev_env_collection' => $request->dev_env_collection, //「サーバ、クラウド」蘭の項目名とValue
+          'role_collection' => $request->role_collection, //「役職」蘭の項目名とValue
       ];
 
   return view('layout_section.layout_section_engineer.section_new_start', $data);

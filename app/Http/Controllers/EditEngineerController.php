@@ -15,7 +15,8 @@ class EditEngineerController extends Controller
   /**
   エンジニア情報検索結果一覧　⇒　編集画面を開く
   */
-  public function openEdit(Request $request){
+  public function 
+  openEdit(Request $request){
 
       //画面入力値（検索キー）を、全て取得する
       $params = $request->input(); //画面入力値
@@ -33,13 +34,13 @@ class EditEngineerController extends Controller
       //参照用画面の暗号化URLを作成する。
       $enc_params = Crypt::encrypt($engineerInfoList[0]['email']."/".$engineerInfoList[0]['base_info_id']);
       $ref_path = $request->getUriForPath('')."/ref_eng_info/".$enc_params;
-Log::debug("ref_path: ".$ref_path);
       $data['ref_path'] = $ref_path;  
 
-      //更新画面上のチェック項目のアイテムと値の設定
+      //更新画面上のチェック項目/リスト項目のアイテムと値の設定
       $data['os_collection'] = $request -> os_collection;  //OS
       $data['pg_lang_collection'] = $request -> pg_lang_collection;  //PG言語
       $data['dev_env_collection'] = $request -> dev_env_collection;  //開発環境（サーバ、クラウド）
+      $data['role_collection'] = $request -> role_collection;  //ロール情報
 
       //call view
       return view('layout_section.layout_section_engineer.section_edit', $data);
@@ -48,7 +49,8 @@ Log::debug("ref_path: ".$ref_path);
 /**
   エンジニア情報URL　⇒　個別エンジニア情報の参照画面を開く
   */
-  public function refEngInfo(Request $request){
+  public function 
+  refEngInfo(Request $request){
 
     //URLパラメータ値を、取得する
     $params['email'] = $request->email; //メールアドレス
@@ -64,7 +66,8 @@ Log::debug("ref_path: ".$ref_path);
     $data['os_collection'] = $request -> os_collection;  //OS
     $data['pg_lang_collection'] = $request -> pg_lang_collection;  //PG言語
     $data['dev_env_collection'] = $request -> dev_env_collection;  //開発環境（サーバ、クラウド）
-
+    $data['role_collection'] = $request -> role_collection;  //ロール情報
+    
     //call view
     return view('layout_section.layout_section_engineer.section_reference_eng_info', $data);
   }
@@ -72,44 +75,46 @@ Log::debug("ref_path: ".$ref_path);
   /**
   編集画面　⇒　エンジニア情報 変更確認画面を開く
   */
-  public function checkEdit(Request $request){
+  public function 
+  checkEdit(Request $request){
 
-          $rules = [
-              'family_name' => 'required',
-              'first_name' => 'required',
-          ];
+      $rules = [
+          'family_name' => 'required',
+          'first_name' => 'required',
+      ];
 
-          //Validationメッセージ（日本語）の設定
-          $messages = [
-              'family_name.required' => '名前（姓）を、入力してください',
-              'first_name.required' => '名前（名）を、入力してください',
-          ];
+      //Validationメッセージ（日本語）の設定
+      $messages = [
+          'family_name.required' => '名前（姓）を、入力してください',
+          'first_name.required' => '名前（名）を、入力してください',
+      ];
 
-          //Validation実行
-          $validator = Validator::make($request->all(), $rules, $messages);
+      //Validation実行
+      $validator = Validator::make($request->all(), $rules, $messages);
 
-          //Validation結果処理
-          if($validator->fails()){  //エラーがある場合
-            return back() //エンジニア情報入力画面へリダイレクト
-              ->withInput($request) //画面入力値
-                ->withErrors($validator); //エラー内容
-          }
+      //Validation結果処理
+      if($validator->fails()){  //エラーがある場合
+        return back() //エンジニア情報入力画面へリダイレクト
+          ->withInput($request) //画面入力値
+            ->withErrors($validator); //エラー内容
+      }
 
-          //画面入力値を全て取得する。
-          $eng_data = $request->all();
-          unset($eng_data['_token']); //_tokenに紐づく値を削除する。
+      //画面入力値を全て取得する。
+      $eng_data = $request->all();
+      unset($eng_data['_token']); //_tokenに紐づく値を削除する。
 
-          //エンジニア情報をセッションに格納する。確認画面表示、DB登録値として使用
-          $request->session()->put(config('const.key_name_list.key_name_eng_data'),$eng_data);
+      //エンジニア情報をセッションに格納する。確認画面表示、DB登録値として使用
+      $request->session()->put(config('const.key_name_list.key_name_eng_data'),$eng_data);
 
-          //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
-          return redirect('/confirm_edit');
+      //入力値の確認画面に遷移するため、confirmEditファンクションへリダイレクト。
+      return redirect('/confirm_edit');
   }
 
   /**
   エンジニア情報 更新データの確認画面を開く
   */
-  public function confirmEdit(Request $request){
+  public function 
+  confirmEdit(Request $request){
 
     //エンジニア情報をセッションから取得する。画面に表示し、内容を確認する。
     $data = $request->session()->get(config('const.key_name_list.key_name_eng_data'));

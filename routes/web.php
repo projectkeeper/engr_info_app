@@ -2,6 +2,7 @@
 
 //use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CreateSkillInfoMiddleware;
+use App\Http\Middleware\CreateRoleInfoMiddleware;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,12 +46,12 @@ Route::post('open_top','LoginController@openTop');
 エンジニア新規情報登録
 */
 Route::post('open_new','NewEngineerController@openNew') //新規登録画面を開く
-  ->middleware(CreateSkillInfoMiddleware::class);
+  ->middleware(CreateSkillInfoMiddleware::class) -> middleware(CreateRoleInfoMiddleware::class);
 Route::get('open_new','NewEngineerController@openNew') //新規登録画面を開く
-  ->middleware(CreateSkillInfoMiddleware::class);
+  ->middleware(CreateSkillInfoMiddleware::class) -> middleware(CreateRoleInfoMiddleware::class);
 Route::post('check_new','NewEngineerController@checkNew'); //入力チェック実施 ->確認画面
 Route::get('confirm_new','NewEngineerController@openNewConfirm')  // 確認画面を開く
-  ->middleware(CreateSkillInfoMiddleware::class);
+  ->middleware(CreateSkillInfoMiddleware::class) -> middleware(CreateRoleInfoMiddleware::class);
 Route::post('regist_new','NewEngineerController@registNew'); // 登録処理を実施⇒完了画面を開く
 Route::post('return_new','NewEngineerController@returnConfirm') // 戻る処理を実施⇒確認画面を開く
   ->middleware(CreateSkillInfoMiddleware::class);
@@ -58,17 +59,17 @@ Route::post('return_new','NewEngineerController@returnConfirm') // 戻る処理�
 エンジニア情報検索
 */
 Route::post('open_search_engineer','SearchEngineerController@openSearch')
-  ->middleware(CreateSkillInfoMiddleware::class);   // トップ画面⇒エンジニア情報検索画面を開く
+  ->middleware(CreateSkillInfoMiddleware::class)-> middleware(CreateRoleInfoMiddleware::class);   // トップ画面⇒エンジニア情報検索画面を開く
 Route::post('exe_search_engineer','SearchEngineerController@exeSearch')
-  ->middleware(CreateSkillInfoMiddleware::class);   // 検索を実施⇒エンジニア情報一覧画面を開く
+  ->middleware(CreateSkillInfoMiddleware::class)-> middleware(CreateRoleInfoMiddleware::class);   // 検索を実施⇒エンジニア情報一覧画面を開く
 
 /**
 エンジニア情報更新、削除
 */
 Route::post('open_edit','EditEngineerController@openEdit') // エンジニア情報一覧画面⇒エンジニア情報 変更画面を開く
-    ->middleware(CreateSkillInfoMiddleware::class);
+    ->middleware(CreateSkillInfoMiddleware::class) -> middleware(CreateRoleInfoMiddleware::class);
 Route::get('ref_eng_info/{url_eng_info_params}','EditEngineerController@refEngInfo') // エンジニア情報URL　⇒　個別エンジニア情報の参照画面を開く
-    ->middleware(CreateSkillInfoMiddleware::class);
+    ->middleware(CreateSkillInfoMiddleware::class) -> middleware(CreateRoleInfoMiddleware::class);
 Route::post('check_edit','EditEngineerController@checkEdit'); // エンジニア情報変更画面で、入力チェックを実施する。⇒ リダイレクトからエンジニア情報 変更確認画面を開く
 Route::get('confirm_edit','EditEngineerController@confirmEdit'); // エンジニア情報変更画面⇒エンジニア情報 変更確認画面を開く
 Route::post('exe_edit','EditEngineerController@exeEdit'); // エンジニア情報変更確認画面⇒エンジニア情報 変更完了画面を開く
@@ -78,7 +79,7 @@ Route::get('confirm_delete','EditEngineerController@confirmDelete'); // エン�
 Route::post('exe_delete','EditEngineerController@exeDelete'); // エンジニア情報 削除確認画面⇒エンジニア情報 削除完了画面を開く
 
 Route::post('export_career_history', 'DataExportController@export_career_history'); // エンジニア情報 変更画面⇒エンジニア情報 エクセルファイルに出力する
-
+Route::get('export_career_history/{email}/{base_info_id}', 'DataExportController@export_career_history'); // エンジニア情報 変更画面⇒エンジニア情報 エクセルファイルに出力する
 /**
 ユーザ情報更新、削除
 */
@@ -130,6 +131,15 @@ Route::post('check_edit_pg_lang','RegEditPgLangMasterController@checkEditPgLang'
 Route::get('exe_edit_pg_lang','RegEditPgLangMasterController@exeEditPgLang'); //更新処理を実施⇒ 更新完了画面を開く
 Route::post('exe_delete_pg_lang','RegEditPgLangMasterController@exeDeletePgLang');//削除処理を実施⇒ 削除完了画面を開く
 
+##Roleマスタ管理##
+Route::post('open_role_info','SearchMasterController@openRoleInfo'); //新規登録画面を開く
+Route::post('open_edit_role','RegEditRoleMaster@openEditRole');     //更新画面を開く
+Route::post('check_new_role','RegEditRoleMaster@checkNewRole');     //登録値の入力チェックを実施⇒ 登録処理をCall
+Route::get('exe_regist_new_role','RegEditRoleMaster@exeRegistRole'); //登録処理を実施⇒ 登録完了画面を開く
+Route::post('check_edit_role','RegEditRoleMaster@checkEditRole');  //登録値の入力チェックを実施⇒ 更新処理をCall
+Route::get('exe_edit_role','RegEditRoleMaster@exeEditRole');      //更新処理を実施⇒ 更新完了画面を開く
+Route::post('exe_delete_role','RegEditRoleMaster@exeDeleteRole');//削除処理を実施⇒ 削除完了画面を開く
+
 ##Infomationマスタ管理##
 Route::post('open_info','RegEditInformationItemController@openInfo'); //新規登録画面を開く
 Route::get('open_info','RegEditInformationItemController@openInfo'); //新規登録画面を開く
@@ -142,6 +152,15 @@ Route::post('open_info_edit','RegEditInformationItemController@openInfoEdit'); /
 Route::post('check_edit_info','RegEditInformationItemController@checkEditInfo'); // 入力チェック実施 -> 更新処理実施
 Route::get('edit_info','RegEditInformationItemController@editInfo'); // 更新処理を実施 ⇒更新完了画面を開く
 Route::post('delete_info','RegEditInformationItemController@deleteInfo'); // 削除処理を実施 ⇒削除完了画面を開く
+
+##エクスポートデータマスタ管理##
+Route::post('open_export_item','SearchMasterController@openExportItem'); //新規登録画面を開く
+Route::post('open_edit_export_item','RegEditExportItemController@openEditExportItem');     //更新画面を開く
+Route::post('check_new_export_item','RegEditExportItemController@checkNewExportItem');     //登録値の入力チェックを実施⇒ 登録処理をCall
+Route::get('exe_regist_new_export_item','RegEditExportItemController@exeRegistExportItem'); //登録処理を実施⇒ 登録完了画面を開く
+Route::post('check_edit_export_item','RegEditExportItemController@checkEditExportItem');  //登録値の入力チェックを実施⇒ 更新処理をCall
+Route::get('exe_edit_export_item','RegEditExportItemController@exeEditExportItem');      //更新処理を実施⇒ 更新完了画面を開く
+Route::post('exe_delete_export_item','RegEditExportItemController@exeDeleteExportItem');//削除処理を実施⇒ 削除完了画面を開く
 
 ##メール機能
 Route::get('/send_reg_eng_complete', 'MailSendController@sendRegEngComplete');

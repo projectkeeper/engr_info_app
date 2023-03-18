@@ -10,6 +10,8 @@
     'master_line_num_dev_env' => '2', //Dev_envマスタ情報新規登録画面。新規登録行の行数。
     'master_line_num_pg_lang' => '2', //PG_langマスタ情報新規登録画面。新規登録行の行数。
     'master_line_num_user' => '2',  //Userマスタ情報新規登録画面。新規登録行の行数。
+    'master_line_num_role' => '2',  //Roleマスタ情報新規登録画面。新規登録行の行数。
+    'master_line_num_export_item' => '2',  //エクスポートアイテムマスタ情報新規登録画面。新規登録行の行数。
     'btn_id_list' => [
       'btn_id_bt_open_edit' => 'bt_open_edit',
       'btn_id_bt_open_new' => 'bt_open_new',

@@ -162,8 +162,7 @@ class RegEditDevEnvMasterController extends Controller
       //$request -> session() -> put('edit_id', $request->id);
       $request->merge(['edit_id' => '$request->id']);
       $data = ['edit_id' => '$request->id'];
-//Log::debug("request: ");
-//Log::debug($request);
+
       return back()
             ->withInput($data) //画面入力値
                 ->withErrors($validator); //エラー内容

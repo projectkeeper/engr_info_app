@@ -12,12 +12,7 @@
 
 <form>
   @csrf
-  <!--  <input type="submit" class="button" title="新規登録" value="New Regist"></input><br>-->
-  <!--<a href="javascript:button_press(\'\',\'\',\'\',\'open_new\')">新規登録</a><br>-->
-<!--
-  <a href="javascript:button_press('','','','open_new')"><img src="/images/regEngineer.png"></a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-  <a href="javascript:button_press('','','','open_search_engineer')"><img src="/images/srchUser.png"></a><br>
--->
+
 <br>
   <div class="box_top1">
     <span class="box-title">よく使う機能</span>
@@ -26,7 +21,7 @@
         <tr>
         @can('engineer')  
           <td>
-            <a href="javascript:button_press('','','','open_new')">
+            <a href="javascript:button_press('bt_open_new','','','open_new')">
               <img border="0" src="../images/regEngineer.png" title="エンジニア情報の登録"/>
             </a>
           </td>
@@ -82,8 +77,9 @@
         </td>
       </tr>
     </table>
+    <input type="hidden" id="status" name="status"/>
  </div>
-@endcan
+ @endcan
 </form>
 <br>
 <div class="box_top1">

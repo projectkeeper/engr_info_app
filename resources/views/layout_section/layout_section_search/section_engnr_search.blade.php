@@ -172,12 +172,9 @@
       <td class="item_value_2">
         <div class="cp_ipselect cp_sl01">
             <select name="role">
-              <option></option>
-              <option value="0">PG</option>
-              <option value="1">SE</option>
-              <option value="2">Team Lead</option>
-              <option value="3">PMO</option>
-              <option value="4">Other</option>
+              @foreach ($role_collection as $role)
+                <option value="{{$role[1]}}">{{$role[0]}}</option>
+              @endforeach
             </select>
         </div>
       </td>
@@ -225,22 +222,22 @@
   </table>
 </div>
 
-  <div class="box3">
-    <table class="auto_position">
-      <tr>
-        <td>
-          <div class="btn-flat-border">
-              <a href="javascript:button_press('','','','open_top')">Top画面</a><br>
-          </div>
-        </td>
-        <td>
-          <div class="btn-flat-border">
-            <a href="javascript:button_press('','','','exe_search_engineer')">検索</a>
-          </div>
-       </td>
-     </tr>
-   </table>
-  </div>
+<div class="box3">
+  <table class="auto_position">
+    <tr>
+      <td>
+        <div class="btn-flat-border">
+            <a href="javascript:button_press('','','','open_top')">Top画面</a><br>
+        </div>
+      </td>
+      <td>
+        <div class="btn-flat-border">
+          <a href="javascript:button_press('','','','exe_search_engineer')">検索</a>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
 
 @isset($searchResultList)
     <div class="box3">

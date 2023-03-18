@@ -26,7 +26,7 @@ if(base_info_id){
   ele3.setAttribute('type', 'hidden');
   ele3.setAttribute('name', 'base_info_id');
   ele3.setAttribute('value', base_info_id);
-  document.forms[0].appendChild(ele3);　// 要素を追加
+  document.forms[0].appendChild(ele3);// 要素を追加
 }
 
  //アクション名の設定
@@ -37,5 +37,8 @@ if(base_info_id){
 
 //指定idのタグに、指定したvalueを設定する。
 function setValtoId(id, value) {
+
+  alert('id: ' + id);
+  //alert('value: ' + id);
   document.getElementById(id).value = value;
 }

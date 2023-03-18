@@ -184,17 +184,15 @@
             </td>
             <td class="item_label_3">
                  <label>職務</label>
-             </td>
-             <td class="item_value_2">
-               <div class="cp_ipselect cp_sl01">
-                 <select name="role_{{$line_num}}">
-                   <option value="0" @if (old($engineerInfo['role']) == 0) selected @endif>PG</option>
-                   <option value="1" @if (old($engineerInfo['role']) == 1) selected @endif>SE</option>
-                   <option value="2" @if (old($engineerInfo['role']) == 2) selected @endif>Team Lead</option>
-                   <option value="3" @if (old($engineerInfo['role']) == 3) selected @endif>PMO</option>
-                   <option value="4" @if (old($engineerInfo['role']) == 4) selected @endif>Other</option>
-                 </select>
-               </div>
+            </td>
+            <td class="item_value_2">
+              <div class="cp_ipselect cp_sl01">
+                <select name="role_{{$line_num}}">
+                  @foreach ($role_collection as $role)
+                    <option value="{{$role[1]}}" {{$engineerInfo['role'] == $role[1]? 'selected':''}}>{{$role[0]}}</option>
+                  @endforeach
+                </select>
+              </div>
              </td>
           </tr>
           <tr>
@@ -257,6 +255,7 @@
   </div>
 
   <input type="hidden" name="base_info_id" value={{$engineerInfo['base_info_id']}}></input>
+  <input type="hidden" name="email" value={{$engineerInfo['email']}}></input>
   <input type="hidden" name="line_num" value={{$line_num}}></input>
 
   <div class="box3">
